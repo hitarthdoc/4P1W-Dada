@@ -10,7 +10,7 @@ namespace SO.Progress
 	public class ProgressScriptableObject : ScriptableObject
 	{
 
-		LevelScriptableObject LSO;
+		public LevelScriptableObject LSO;
 
 		//Initialize with 0
 		[SerializeField]
