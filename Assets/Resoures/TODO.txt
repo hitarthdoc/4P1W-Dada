@@ -1,0 +1,17 @@
+1. Create 5 Letter word Panel to 12 Letter Word Panels. [PREFABS]
+
+	2 Hrs			RED
+
+2. Create Editor utility for Level scriptable Object.
+
+	1 to 2 DAYS		GREEN
+
+3. Use Onclick.AddListener () for passing the Letters.
+
+	4 - 5 Hrs		YELLOW
+
+4. Create OnClick Listener (NOT EVENT LISTENER) for Letters on Word Panel for Tap and Remove.
+
+	2 - 3 Hrs		YELLOW
+
+-HITARTH 26/01/2017
