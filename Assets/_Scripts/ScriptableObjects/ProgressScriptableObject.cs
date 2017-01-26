@@ -1,21 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+using SO.Levels;
+
 namespace SO.Progress
 {
 	public class ProgressScriptableObject : ScriptableObject
 	{
 
-		// Use this for initialization
-		void Start ()
-		{
-	
-		}
-	
-		// Update is called once per frame
-		void Update ()
-		{
-	
-		}
+		LevelScriptableObject LSO;
+
+
 	}
 }
