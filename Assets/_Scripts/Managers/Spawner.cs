@@ -1,9 +1,16 @@
-﻿using UnityEngine ;
-using System.Collections ;
+﻿using UnityEngine;
+using System.Collections;
+
+using UnityEngine.UI;
+
+//using UnityEngine.Events;
+
+using SO.Levels;
+using SO.Progress;
 
 namespace Managers
 {
-	
+
 	public class Spawner : MonoBehaviour
 	{
 
