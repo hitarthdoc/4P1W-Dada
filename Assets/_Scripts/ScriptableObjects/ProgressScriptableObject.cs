@@ -40,5 +40,21 @@ namespace SO.Progress
 				LevelIndicesToSelectFromCurrentBatch.Add ( i );
 			}
 		}
+
+		/* Send the Current Level Object to spawn from the Current Batch.
+		* Update the current Batch if Need be.
+		* 
+		* Return: SO.Levels.Level object.
+		*/
+		public Level GetCurrentLevelToSpawn ()
+		{
+			return LSO.LevelBatches [ CurrentBatch ].Levels [ CurrentLevelIndexInBatch ];
+		}
+
+		public void IncreaseCurrentLevel ()
+		{
+			CurrentLevel++;
+		}
+
 	}
 }
