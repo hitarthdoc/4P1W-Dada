@@ -1,28 +1,31 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using UnityEngine ;
+using System.Collections ;
 
-using System.Collections.Generic;
+using System.Collections.Generic ;
 
-[System.Serializable]
-public class Level
+namespace SO.Levels
 {
-	public List <Sprite> Pics = new List<Sprite> (4);
+	[System.Serializable]
+	public class Level
+	{
+		public List <Sprite> Pics = new List<Sprite> ( 4 ) ;
 
-	public 	string Word;
+		public 	string Word ;
 
-	public char [] OtherChars;
+		public char [] OtherChars ;
 
-}
+	}
 
-[System.Serializable]
-public class LevelBatch
-{
-	public List <Level> Levels = new List<Level> ( 10 );
-}
-	
+	[System.Serializable]
+	public class LevelBatch
+	{
+		public List <Level> Levels = new List<Level> ( 10 ) ;
+	}
 
-public class LevelScriptableObject : ScriptableObject
-{
-	public List <LevelBatch> LevelBatches;
 
+	public class LevelScriptableObject : ScriptableObject
+	{
+		public List <LevelBatch> LevelBatches ;
+
+	}
 }
