@@ -29,5 +29,16 @@ namespace SO.Progress
 		[SerializeField]
 		List <int> LevelIndicesToSelectFromCurrentBatch;
 
+		private void FetchNextBatch ()
+		{
+			CurrentBatch = ( CurrentLevel / 10 ) % LSO.LevelBatches.Count;
+
+			LevelIndicesToSelectFromCurrentBatch.Clear ();
+
+			for ( int i = 0; i < LSO.LevelBatches [ CurrentBatch ].Levels.Count; i++ )
+			{
+				LevelIndicesToSelectFromCurrentBatch.Add ( i );
+			}
+		}
 	}
 }
