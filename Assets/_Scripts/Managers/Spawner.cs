@@ -77,5 +77,37 @@ namespace Managers
 			);
 		}
 
+		private void ClearCurrentLevel ()
+		{
+			ImagesHolder.GetComponent <GridLayoutGroup> ().enabled = false;
+
+			AnswerButtonsHolder.GetComponent <GridLayoutGroup> ().enabled = false;
+
+			OptionButtonsHolder.GetComponent <GridLayoutGroup> ().enabled = false;
+
+			for ( int i = 0; i < ImagesHolder.childCount; i++ )
+			{
+				Destroy ( ImagesHolder.GetChild ( i ).gameObject );
+			}
+
+			for ( int i = 0; i < AnswerButtonsHolder.childCount; i++ )
+			{
+				Destroy ( AnswerButtonsHolder.GetChild ( i ).gameObject );
+			}
+
+			for ( int i = 0; i < OptionButtonsHolder.childCount; i++ )
+			{
+				OptionButtonsHolder.GetChild ( i ).GetComponent <Button> ().onClick.RemoveAllListeners ();
+				Destroy ( OptionButtonsHolder.GetChild ( i ).gameObject );
+			}
+
+			ImagesHolder.GetComponent <GridLayoutGroup> ().enabled = true;
+
+			AnswerButtonsHolder.GetComponent <GridLayoutGroup> ().enabled = true;
+
+			OptionButtonsHolder.GetComponent <GridLayoutGroup> ().enabled = true;
+
+		}
+
 	}
 }
