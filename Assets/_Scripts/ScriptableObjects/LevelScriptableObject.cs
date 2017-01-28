@@ -37,13 +37,14 @@ namespace SO.Levels
 	[System.Serializable]
 	public class LevelBatch
 	{
-		public List <Level> Levels = new List<Level> ( 10 ) ;
+		public List <Level> Levels = new List<Level> ( 10 );
 	}
 
 
 	public class LevelScriptableObject : ScriptableObject
 	{
-		public List <LevelBatch> LevelBatches ;
+		public List <LevelBatch> LevelBatches;
 
+		public static int MaxLevels;
 	}
 }
