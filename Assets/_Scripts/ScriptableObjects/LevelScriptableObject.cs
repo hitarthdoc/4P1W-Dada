@@ -1,18 +1,28 @@
-﻿using UnityEngine ;
-using System.Collections ;
+﻿using UnityEngine;
+using System.Collections;
 
-using System.Collections.Generic ;
+using System.Collections.Generic;
 
 namespace SO.Levels
 {
+
 	[System.Serializable]
 	public class Level
 	{
-		public List <Sprite> Pics = new List<Sprite> ( 4 ) ;
+		[SerializeField]
+		private bool completionStatus = false;
 
-		public 	string Word ;
+		public bool CompletionStatus
+		{
+			get	{	return completionStatus;	}
+		}
 
-		public char [] OtherChars ;
+		public List <Sprite> Pics = new List<Sprite> ( 4 );
+
+		public 	string Word;
+
+		public char [] OtherChars;
+
 
 	}
 
