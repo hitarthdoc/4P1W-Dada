@@ -67,6 +67,13 @@ namespace Managers
 
 		}
 
+		private void GetAndSpawnNextLevel ()
+		{
+			CurrentLevel = PSO.GetNextLevelToSpawn ();
+
+			SpawnCurrentLevel ();
+		}
+
 		private void AttachListener ( Button attachToThis, int typeOfCall, char argutmentToPass )
 		{
 			attachToThis.onClick.AddListener ( 
