@@ -1,11 +1,17 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-public class LevelScriptableObjectAsset
+using SO.Levels;
+
+namespace CustomEditor
 {
-	[MenuItem("Assets/Create/LevelScriptableObject")]
-	public static void CreateAsset ()
+
+	public class LevelScriptableObjectAsset
 	{
-		ScriptableObjectUtility.CreateAsset<LevelScriptableObject> ();
+		[MenuItem ( "Assets/Create/Level ScriptableObject" )]
+		public static void CreateAsset ()
+		{
+			ScriptableObjectUtility.CreateAsset<LevelScriptableObject> () ;
+		}
 	}
 }
