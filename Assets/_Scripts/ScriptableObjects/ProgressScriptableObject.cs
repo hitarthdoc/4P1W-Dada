@@ -41,6 +41,37 @@ namespace SO.Progress
 			}
 		}
 
+		/* Send the Next Level Object to spawn from the Current Batch.
+		* Update the current Batch if Need be.
+		* 
+		* Return: SO.Levels.Level object.
+		*/
+		public Level GetNextLevelToSpawn ()
+		{
+			/* TODO:
+			 * ASK: WHAT TO DO WHEN ( CurrentLevel >= LevelScriptableObject.MaxLevels ).
+			 */
+
+			IncreaseCurrentLevel ();
+
+			if ( CurrentLevel >= LevelScriptableObject.MaxLevels )
+			{
+//				Managers.GameManager.GameOver ();
+//				CurrentLevel %= LevelScriptableObject.MaxLevels;
+//				LevelIndicesToSelectFromCurrentBatch.Clear ();
+			}
+			if ( LevelIndicesToSelectFromCurrentBatch.Count == 0 )
+			{
+				FetchNextBatch ();
+			}
+
+			int randomIndex = Random.Range ( 0, LevelIndicesToSelectFromCurrentBatch.Count - 1 );
+			CurrentLevelIndexInBatch = LevelIndicesToSelectFromCurrentBatch [ randomIndex ];
+			LevelIndicesToSelectFromCurrentBatch.RemoveAt ( randomIndex );
+
+			return LSO.LevelBatches [ CurrentBatch ].Levels [ CurrentLevelIndexInBatch ];
+		}
+
 		/* Send the Current Level Object to spawn from the Current Batch.
 		* Update the current Batch if Need be.
 		* 
