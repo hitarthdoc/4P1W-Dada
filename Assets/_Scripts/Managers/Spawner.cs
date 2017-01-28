@@ -31,11 +31,18 @@ namespace Managers
 		private Level CurrentLevel;
 
 		// Use this for initialization
+		void Awake ()
+		{
+			CurrentLevel = PSO.GetCurrentLevelToSpawn ();
+
+		}
+
+		// Use this for initialization
 		void Start ()
 		{
-	
+			SpawnCurrentLevel ();
 		}
-	
+
 		// Update is called once per frame
 		void Update ()
 		{
