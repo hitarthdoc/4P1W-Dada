@@ -23,7 +23,15 @@ namespace SO.Levels
 
 		public char [] OtherChars;
 
+		public void SetCompletionStatus ()
+		{
+			completionStatus = true;
+		}
 
+		public void RsetCompletionStatus ()
+		{
+			completionStatus = false;
+		}
 	}
 
 	[System.Serializable]
