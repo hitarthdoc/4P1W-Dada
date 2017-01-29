@@ -8,6 +8,9 @@ using UnityEngine.UI;
 using SO.Levels;
 using SO.Progress;
 
+using States.Options;
+using States.Answers;
+
 namespace Managers
 {
 
@@ -23,6 +26,9 @@ namespace Managers
 		[SerializeField]
 		InputManager IPManReference;
 
+		[SerializeField]
+		AnswerTextManager ATManReference;
+
 		public GameObject OptionLetterButtonPrefab;
 
 		public GameObject ImagePrefab;
@@ -35,6 +41,7 @@ namespace Managers
 
 		public Transform OptionButtonsHolder;
 
+		[SerializeField]
 		private Level CurrentLevel;
 
 		// Use this for initialization
@@ -50,10 +57,14 @@ namespace Managers
 			SpawnCurrentLevel ();
 		}
 
-		// Update is called once per frame
-		void Update ()
+		void OnEnable ()
 		{
-			
+			ATManReference.OnLevelComplete += GetAndSpawnNextLevel;
+		}
+
+		void OnDisable ()
+		{
+			ATManReference.OnLevelComplete -= GetAndSpawnNextLevel;
 		}
 
 		private void SpawnCurrentLevel ()
@@ -81,6 +92,13 @@ namespace Managers
 
 		}
 
+		IEnumerator ATMAddNewAnswerButtonsCaller ()
+		{
+			yield return new WaitForEndOfFrame ();
+			
+			ATManReference.AddNewAnswerButtonsReference ( AnswerButtonsHolder );
+		}
+
 		private void GetAndSpawnNextLevel ()
 		{
 			CurrentLevel = PSO.GetNextLevelToSpawn ();
@@ -88,6 +106,10 @@ namespace Managers
 			SpawnCurrentLevel ();
 		}
 
+
+		/*	DEPRECATED
+		 * 
+		*/
 		private void AttachListener ( Button attachToThis, int typeOfCall, char argutmentToPass )
 		{
 			attachToThis.onClick.AddListener ( 
