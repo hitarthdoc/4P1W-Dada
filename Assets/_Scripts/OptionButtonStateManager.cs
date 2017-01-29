@@ -18,6 +18,7 @@ namespace States.Options
 
 	public class OptionButtonStateManager : MonoBehaviour
 	{
+
 		[SerializeField]
 		InputManager IPManReference;
 
@@ -47,6 +48,32 @@ namespace States.Options
 					this.OnClick ();
 				} 
 			);
+		}
+
+		// Use this for initialization
+		void Start ()
+		{
+		}
+
+		public void AssignLetter ( char newLetter )
+		{
+			currentButtonState = OptionButtonStates.NotClicked;
+
+			letter = newLetter;
+			textComponent.text = letter.ToString ();
+		}
+
+		public void AssignReferences ( InputManager newIPManRef, AnswerTextManager newATManRef )
+		{
+			IPManReference = newIPManRef;
+			ATManReference = newATManRef;
+		}
+
+		public void ResetClickedStatus ()
+		{
+			currentButtonState = OptionButtonStates.NotClicked;
+			
+			textComponent.text = letter.ToString ();
 		}
 
 		void OnClick ()
