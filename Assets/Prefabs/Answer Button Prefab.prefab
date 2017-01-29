@@ -39,9 +39,9 @@ GameObject:
   - 222: {fileID: 222000012978545482}
   - 114: {fileID: 114000012086678154}
   - 114: {fileID: 114000010987347440}
-  - 114: {fileID: 114000013887642904}
+  - 114: {fileID: 114000014078740112}
   m_Layer: 5
-  m_Name: Option Button Prefab
+  m_Name: Answer Button Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,7 +148,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
---- !u!114 &114000013887642904
+--- !u!114 &114000014078740112
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000014086837720}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cfc1c495ba408945b39f0f6353b3fc6, type: 3}
+  m_Script: {fileID: 11500000, guid: a52f3c62fe036ea419970ddf4c790d4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IPManReference: {fileID: 0}
