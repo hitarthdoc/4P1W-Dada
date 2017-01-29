@@ -71,22 +71,48 @@ namespace Managers
 		{
 			ClearCurrentLevel ();
 
-			/*	TODO:
-			 * 		SEND currentLevel.Word to someOne for tracking.
+			/*	DONE:
+			 * 		SEND currentLevel. Word to someOne for tracking.
 			*/
 
-			foreach ( Sprite image in CurrentLevel.Pics )
+			if (CurrentLevel != null)
 			{
-				GameObject newImageReference = Instantiate ( ImagePrefab, ImagesHolder ) as GameObject;
-				newImageReference.GetComponent <Image> ().sprite = image;
-			}
+				ATManReference.AnswerWord = CurrentLevel.Word;
 
-			foreach ( char optionLetter in CurrentLevel.OtherChars )
-			{
-				GameObject newOptionButtonReference = Instantiate ( OptionLetterButtonPrefab, OptionButtonsHolder ) as GameObject;
-				newOptionButtonReference.GetComponentInChildren <Text> ().text = optionLetter.ToString ();
+				foreach ( Sprite image in CurrentLevel.Pics )
+				{
+					GameObject newImageReference = Instantiate ( ImagePrefab, ImagesHolder ) as GameObject;
+					newImageReference.GetComponent <Image> ().sprite = image;
+				}
 
-				AttachListener ( newOptionButtonReference.GetComponent <Button> (), 1, optionLetter );
+				foreach ( char optionLetter in CurrentLevel.OtherChars )
+				{
+					GameObject newOptionButtonReference = Instantiate ( OptionLetterButtonPrefab, OptionButtonsHolder ) as GameObject;
+
+					OptionButtonStateManager tempRef = newOptionButtonReference.GetComponent <OptionButtonStateManager> ();
+
+					tempRef.AssignLetter ( optionLetter );
+					tempRef.AssignReferences ( IPManReference, ATManReference );
+
+					//	Removed both as Now it is done by OBSM.
+					//	newOptionButtonReference.GetComponentInChildren <Text> ().text = optionLetter.ToString ();
+					//	AttachListener ( newOptionButtonReference.GetComponent <Button> (), 1, optionLetter );
+
+				}
+
+				foreach ( char answerLetter in CurrentLevel.Word )
+				{
+					GameObject newAnswerButtonReference = Instantiate ( AnswerLetterButtonPrefab, AnswerButtonsHolder ) as GameObject;
+
+					AnswerButtonStateManager tempRef = newAnswerButtonReference.GetComponent <AnswerButtonStateManager> ();
+
+					tempRef.AssignReferences ( IPManReference, ATManReference );
+
+					//	Removed both as Now it is done by OBSM.
+					//	newOptionButtonReference.GetComponentInChildren <Text> ().text = optionLetter.ToString ();
+					//	AttachListener ( newOptionButtonReference.GetComponent <Button> (), 1, optionLetter );
+
+				}
 
 			}
 
