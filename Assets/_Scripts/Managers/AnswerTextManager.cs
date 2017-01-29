@@ -89,6 +89,35 @@ namespace Managers
 
 		}
 
+		public void CheckTypedLetters ()
+		{
+
+			bool correctAnswer = true;
+
+			for ( int letterIndex = 0; letterIndex < answerWord.Length; letterIndex++ )
+			{
+				correctAnswer = answerWord [ letterIndex ].Equals ( typedLetters [ letterIndex ] );
+				if ( !correctAnswer )
+				{
+					Debug.Log ( "Letter Mismatch at\t" + letterIndex.ToString () + "\tLetters are\t\t" +
+						answerWord [ letterIndex ].ToString () + "\t" + typedLetters [ letterIndex ] );
+					break;
+				}
+			}
+
+			if ( correctAnswer )
+			{
+				//Next Level;
+			}
+
+			if ( !correctAnswer )
+			{
+				//Next Level;
+				Debug.Log ( "Sorry Man your at a LOSS." );
+			}
+
+		}
+
 			
 //			Debug.Log ( answerButtonParent.childCount );
 		}
