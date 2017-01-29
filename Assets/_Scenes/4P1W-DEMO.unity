@@ -3138,11 +3138,13 @@ MonoBehaviour:
   LSO: {fileID: 11400000, guid: 1b6d233c2f2e9df47a4d4df4ca91dd1b, type: 2}
   PSO: {fileID: 11400000, guid: 1c6a838f3ad1eee4e9c04df80919e5e7, type: 2}
   IPManReference: {fileID: 807270068}
+  ATManReference: {fileID: 1963669749}
   OptionLetterButtonPrefab: {fileID: 1000014086837720, guid: 1d00b21f976b948478eb44f6f4639821,
     type: 2}
   ImagePrefab: {fileID: 1000012587535870, guid: 72bba21565cb2ad47ae1e0c397481c88,
     type: 2}
-  AnswerLetterButtonPrefab: {fileID: 0}
+  AnswerLetterButtonPrefab: {fileID: 1000014086837720, guid: 797d2f53d6b0ca24c8c78ff3d98930ed,
+    type: 2}
   ImagesHolder: {fileID: 230106288}
   AnswerButtonsHolder: {fileID: 1819724972}
   OptionButtonsHolder: {fileID: 1178582626}
@@ -3818,6 +3820,7 @@ Transform:
   - {fileID: 1082382276}
   - {fileID: 807270067}
   - {fileID: 1062898719}
+  - {fileID: 1963669748}
   m_Father: {fileID: 0}
   m_RootOrder: 3
 --- !u!1 &1418549959
@@ -4448,7 +4451,7 @@ MonoBehaviour:
     m_Right: 25
     m_Top: 25
     m_Bottom: 25
-  m_ChildAlignment: 3
+  m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 70, y: 70}
@@ -5212,6 +5215,48 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1956042858}
+--- !u!1 &1963669747
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1963669748}
+  - 114: {fileID: 1963669749}
+  m_Layer: 0
+  m_Name: Answer Text Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1963669748
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1963669747}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1388552282}
+  m_RootOrder: 3
+--- !u!114 &1963669749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1963669747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 935ae6d78d25f7b49a694047948482d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  answerWord: 
+  typedLetters: 
 --- !u!1 &1969659308
 GameObject:
   m_ObjectHideFlags: 0
