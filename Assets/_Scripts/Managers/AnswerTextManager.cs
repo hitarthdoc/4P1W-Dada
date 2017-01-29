@@ -32,6 +32,10 @@ namespace Managers
 		[SerializeField]
 		List<AnswerButtonStateManager> answerButtonReferences;
 
+		public delegate void LevelComplete ();
+
+		public event LevelComplete OnLevelComplete;
+
 		/*	Fnction to add a new Letter to the Typed string.
 		 * 
 		 * Params:
@@ -121,6 +125,15 @@ namespace Managers
 			if ( correctAnswer )
 			{
 				//Next Level;
+
+				if ( OnLevelComplete != null )
+				{
+					OnLevelComplete ();
+				}
+				else
+				{
+					Debug.Log ( "Get Next Level...;-)" );
+				}
 			}
 
 			if ( !correctAnswer )
