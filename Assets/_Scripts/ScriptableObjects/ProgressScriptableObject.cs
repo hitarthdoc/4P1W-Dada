@@ -85,7 +85,14 @@ namespace SO.Progress
 		*/
 		public Level GetCurrentLevelToSpawn ()
 		{
-			return LSO.LevelBatches [ CurrentBatch ].Levels [ CurrentLevelIndexInBatch ];
+			if ( CurrentLevel != 0 )
+			{
+				return LSO.LevelBatches [ CurrentBatch ].Levels [ CurrentLevelIndexInBatch ];
+			}
+			else
+			{
+				return GetNextLevelToSpawn ();
+			}
 		}
 
 		public void IncreaseCurrentLevel ()
