@@ -19,7 +19,7 @@ namespace SO.Progress
 
 		// Should always Initialize with "0". ONLY ON First App Launch;
 		[SerializeField]
-		int CurrentBatch;
+		int CurrentBatch = -1;
 		// = CurrentLevel / 10;
 
 		[SerializeField]
@@ -31,7 +31,8 @@ namespace SO.Progress
 
 		private void FetchNextBatch ()
 		{
-			CurrentBatch = ( CurrentLevel / 10 ) % LSO.LevelBatches.Count;
+			Debug.Log ("Here");
+			CurrentBatch = ( CurrentBatch + 1 ) % LSO.LevelBatches.Count; // ( CurrentLevel / 10 ) % LSO.LevelBatches.Count;
 
 			LevelIndicesToSelectFromCurrentBatch.Clear ();
 
@@ -48,8 +49,10 @@ namespace SO.Progress
 		*/
 		public Level GetNextLevelToSpawn ()
 		{
-			/* TODO:
+			/* WAITING FOR IMPLEMENTATION:
 			 * ASK: WHAT TO DO WHEN ( CurrentLevel >= LevelScriptableObject.MaxLevels ).
+			 * 
+			 * ANS: Display GO and notify to wait for new Levels.
 			 */
 
 			IncreaseCurrentLevel ();
@@ -59,7 +62,10 @@ namespace SO.Progress
 //				Managers.GameManager.GameOver ();
 //				CurrentLevel %= LevelScriptableObject.MaxLevels;
 //				LevelIndicesToSelectFromCurrentBatch.Clear ();
+
+				return null;
 			}
+
 			if ( LevelIndicesToSelectFromCurrentBatch.Count == 0 )
 			{
 				FetchNextBatch ();
