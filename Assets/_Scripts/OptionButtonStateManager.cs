@@ -34,5 +34,46 @@ namespace States.Options
 		[SerializeField]
 		Text textComponent;
 
+		// Use this for initialization before Start
+		void Awake ()
+		{
+			buttonComponent = GetComponent <Button> ();
+			textComponent = GetComponentInChildren <Text> ();
+
+			buttonComponent.onClick.AddListener 
+			( 
+				delegate
+				{
+					this.OnClick ();
+				} 
+			);
+		}
+
+		void OnClick ()
+		{
+			switch ( currentButtonState )
+			{
+				
+				case OptionButtonStates.Clicked:
+					break;
+
+				case OptionButtonStates.NotClicked:
+//					IPManReference.AcceptOption ( letter );
+					break;
+
+//					Used for Possible Power-Ups
+				case OptionButtonStates.Disabled:
+					break;
+
+				case OptionButtonStates.Default:
+					break;
+
+				default:
+					Debug.Log ( "We Have a Problem" );
+					break;
+			}
+		}
+
 	}
+
 }
