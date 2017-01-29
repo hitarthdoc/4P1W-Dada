@@ -58,6 +58,19 @@ namespace States.Answers
 		{
 		}
 
+		public void AssignLetter ( char newLetter )
+		{
+			letter = newLetter;
+			currentButtonState = AnswerButtonStates.Lettered;
+			textComponent.text = letter.ToString ();
+		}
+
+		public void AssignReferences ( InputManager newIPManRef, AnswerTextManager newATManRef )
+		{
+			IPManReference = newIPManRef;
+			ATManReference = newATManRef;
+		}
+
 		void OnClick ()
 		{
 			switch ( currentButtonState )
