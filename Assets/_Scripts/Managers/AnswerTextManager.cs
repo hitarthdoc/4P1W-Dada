@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using States.Options;
+using States.Answers;
 
 namespace Managers
 {
@@ -27,6 +28,9 @@ namespace Managers
 
 		[SerializeField]
 		List<OptionButtonStateManager> optionButtonReferences;
+
+		[SerializeField]
+		List<AnswerButtonStateManager> answerButtonReferences;
 
 		/*	Fnction to add a new Letter to the Typed string.
 		 * 
@@ -89,6 +93,15 @@ namespace Managers
 
 		}
 
+		public void RemoveLetterFromTypedWord ( char letter, int siblingIndex )
+		{
+//			Debug.Log ( typedLetters [ siblingIndex ].ToString () + "\t" + letter.ToString () );
+
+			optionButtonReferences [ siblingIndex ].ResetClickedStatus ();
+			optionButtonReferences [ siblingIndex ] = default (OptionButtonStateManager);
+			typedLetters [ siblingIndex ] = default (char);
+		}
+
 		public void CheckTypedLetters ()
 		{
 
@@ -117,6 +130,24 @@ namespace Managers
 			}
 
 		}
+
+		public void AddNewAnswerButtonsReference ( Transform answerButtonParent )
+		{
+			answerButtonReferences.Clear ();
+			typedLetters.Clear ();
+			optionButtonReferences.Clear ();
+
+			typedLetters = new List<char> ( answerButtonParent.childCount );
+			optionButtonReferences = new List<OptionButtonStateManager> ( answerButtonParent.childCount );
+			answerButtonReferences = new List<AnswerButtonStateManager> ( answerButtonParent.childCount );
+
+			for ( int i = 0; i < answerButtonParent.childCount; i++ )
+			{
+				answerButtonReferences.Add ( answerButtonParent.GetChild ( i ).GetComponent <AnswerButtonStateManager> () );
+				typedLetters.Add ( default(char) );
+				optionButtonReferences.Add ( default ( OptionButtonStateManager ) );
+
+			}
 
 			
 //			Debug.Log ( answerButtonParent.childCount );
