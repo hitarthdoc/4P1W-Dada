@@ -28,6 +28,30 @@ namespace Managers
 		[SerializeField]
 		List<OptionButtonStateManager> optionButtonReferences;
 
+		/*	Fnction to add a new Letter to the Typed string.
+		 * 
+		 * Params:
+		 * 	newLetter: the Letter tapped on by User.
+		 * 
+		 * 	Return:	It will return "true" on succesfull addition of the Letter, else it will return "false".
+		 * 
+		*/
+		public bool AddLetterToTypedWord ( char newLetter )
+		{
+			if ( typedLetters.Count < answerWord.Length )
+			{
+				typedLetters.Add ( newLetter );
+
+				if ( typedLetters.Count == answerWord.Length )
+				{
+					CheckTypedLetters ();
+				}
+
+				return true;
+			}
+
+			return false;
+		}
 			
 //			Debug.Log ( answerButtonParent.childCount );
 		}
