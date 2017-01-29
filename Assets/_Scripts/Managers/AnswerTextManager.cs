@@ -52,6 +52,43 @@ namespace Managers
 
 			return false;
 		}
+
+		/*	Fnction to add a new Letter to the Typed string.
+		 * 
+		 * Params:
+		 * 	newLetter: 		the Letter tapped on by User.
+		 * 	senderManager: 	the OBSM reference of the callee.
+		 * 	Return:	It will return "true" on succesfull addition of the Letter, else it will return "false".
+		 * 
+		*/
+		public bool AddLetterToTypedWord ( char newLetter, OptionButtonStateManager senderManager )
+		{
+			int indexToInsert = -1;
+			for ( int i = 0; i < typedLetters.Count; i++ )
+			{
+				if ( typedLetters [ i ].Equals ( '\0' ) )
+				{
+					indexToInsert = i;
+					break;
+				}
+			}
+			
+			if ( indexToInsert == -1 )
+			{
+//				Debug.Log ( indexToInsert );
+				return false;
+			}
+
+			typedLetters [ indexToInsert ] = newLetter;
+			optionButtonReferences [ indexToInsert ] = senderManager;
+			answerButtonReferences [ indexToInsert ].AssignLetter ( newLetter );
+
+			CheckTypedLetters ();
+
+			return true;
+
+		}
+
 			
 //			Debug.Log ( answerButtonParent.childCount );
 		}
