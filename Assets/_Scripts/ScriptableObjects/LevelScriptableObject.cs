@@ -45,6 +45,6 @@ namespace SO.Levels
 	{
 		public List <LevelBatch> LevelBatches;
 
-		public static int MaxLevels;
+		public static int MaxLevels = 10;
 	}
 }
