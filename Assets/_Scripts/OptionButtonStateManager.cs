@@ -23,6 +23,9 @@ namespace States.Options
 		InputManager IPManReference;
 
 		[SerializeField]
+		AnswerTextManager ATManReference;
+
+		[SerializeField]
 		OptionButtonStates currentButtonState = OptionButtonStates.Default;
 
 		//The letter it will be holding.
@@ -85,7 +88,12 @@ namespace States.Options
 					break;
 
 				case OptionButtonStates.NotClicked:
+					if ( ATManReference.AddLetterToTypedWord ( letter, this ) )
+					{
 //					IPManReference.AcceptOption ( letter );
+						currentButtonState = OptionButtonStates.Clicked;
+						textComponent.text = "";
+					}
 					break;
 
 //					Used for Possible Power-Ups
