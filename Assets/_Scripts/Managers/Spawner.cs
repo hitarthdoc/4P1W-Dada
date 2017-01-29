@@ -114,6 +114,7 @@ namespace Managers
 
 				}
 
+				StartCoroutine ( "ATMAddNewAnswerButtonsCaller" );
 			}
 
 		}
