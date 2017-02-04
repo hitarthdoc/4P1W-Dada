@@ -29,9 +29,9 @@ namespace SO.Progress
 		[SerializeField]
 		List <int> LevelIndicesToSelectFromCurrentBatch;
 
-		private void FetchNextBatch ()
+		private bool FetchNextBatch ()
 		{
-			Debug.Log ("Here");
+//			Debug.Log ("Here");
 			CurrentBatch = ( CurrentBatch + 1 ) % LSO.LevelBatches.Count; // ( CurrentLevel / 10 ) % LSO.LevelBatches.Count;
 
 			LevelIndicesToSelectFromCurrentBatch.Clear ();
@@ -40,6 +40,8 @@ namespace SO.Progress
 			{
 				LevelIndicesToSelectFromCurrentBatch.Add ( i );
 			}
+			Debug.Log ("Here First");
+			return true;
 		}
 
 		/* Send the Next Level Object to spawn from the Current Batch.
@@ -68,9 +70,11 @@ namespace SO.Progress
 
 			if ( LevelIndicesToSelectFromCurrentBatch.Count == 0 )
 			{
-				FetchNextBatch ();
+				if ( FetchNextBatch () )
+				{
+				}
 			}
-
+			Debug.Log ("Should Be here Second");
 			int randomIndex = Random.Range ( 0, LevelIndicesToSelectFromCurrentBatch.Count - 1 );
 			CurrentLevelIndexInBatch = LevelIndicesToSelectFromCurrentBatch [ randomIndex ];
 			LevelIndicesToSelectFromCurrentBatch.RemoveAt ( randomIndex );
