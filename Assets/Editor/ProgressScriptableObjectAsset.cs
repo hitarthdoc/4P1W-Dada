@@ -3,7 +3,7 @@ using UnityEditor;
 
 using SO.Progress;
 
-namespace CustomEditor
+namespace MyCustomEditor
 {
 
 	public class ProgressScriptableObjectAsset
