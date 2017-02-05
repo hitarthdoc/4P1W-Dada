@@ -3,7 +3,7 @@ using UnityEditor;
 
 using SO.Levels;
 
-namespace CustomEditor
+namespace MyCustomEditor
 {
 
 	public class LevelScriptableObjectAsset
