@@ -75,7 +75,7 @@ namespace SO.Progress
 				}
 			}
 			Debug.Log ("Should Be here Second");
-			int randomIndex = Random.Range ( 0, LevelIndicesToSelectFromCurrentBatch.Count - 1 );
+			int randomIndex = Random.Range ( 0, LevelIndicesToSelectFromCurrentBatch.Count );
 			CurrentLevelIndexInBatch = LevelIndicesToSelectFromCurrentBatch [ randomIndex ];
 			LevelIndicesToSelectFromCurrentBatch.RemoveAt ( randomIndex );
 
