@@ -1,21 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-<<<<<<< HEAD
-public class InputManager : MonoBehaviour
-{
-
-	// Use this for initialization
-	void Start ()
-	{
-	
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-	
-=======
 namespace Managers
 {
 
@@ -48,6 +33,5 @@ namespace Managers
 			Debug.Log ( letterPressed );
 		}
 
->>>>>>> refs/remotes/origin/master
 	}
 }

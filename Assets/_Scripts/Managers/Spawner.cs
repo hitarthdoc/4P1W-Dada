@@ -1,17 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-<<<<<<< HEAD
-using SO.Levels;
-using SO.Progress;
-
-namespace Managers
-{
-	public class Spawner : MonoBehaviour
-	{
-		public LevelScriptableObject LSO;
-		public ProgressScriptableObject PSO;
-=======
 using UnityEngine.UI;
 
 using System;
@@ -75,22 +64,12 @@ namespace Managers
 			CurrentLevel = PSO.GetCurrentLevelToSpawn ();
 
 		}
->>>>>>> refs/remotes/origin/master
+
 
 		// Use this for initialization
 		void Start ()
 		{
-<<<<<<< HEAD
 	
-		}
-	
-		// Update is called once per frame
-		void Update ()
-		{
-	
-		}
-=======
-//			SpawnCurrentLevel ();
 		}
 
 		void OnEnable ()
@@ -293,6 +272,6 @@ namespace Managers
 //			Debug.Log ("I did reach here.\t" + toGLG.cellSize.ToString ());
 		}
 
->>>>>>> refs/remotes/origin/master
+
 	}
 }
