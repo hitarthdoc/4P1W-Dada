@@ -110,7 +110,31 @@ namespace SO.Levels
 	[System.Serializable]
 	public class LevelBatch
 	{
+		public bool show = false;
+
 		public List <Level> Levels = new List<Level> ( 10 );
+
+		public void AddLevel ()
+		{
+			Levels.Add ( new Level () );
+		}
+
+		public LevelBatch ()
+		{
+			show = false;
+
+			AddLevel ();
+		}
+
+		public void DeleteLevel ( int levelIndex )
+		{
+			Levels.RemoveAt ( levelIndex );
+		}
+
+		public void ResetLevel ( int levelIndex )
+		{
+			Levels [ levelIndex ] = new Level ();
+		}
 	}
 
 
