@@ -12,53 +12,47 @@ MonoBehaviour:
   m_Name: Levels in Batches
   m_EditorClassIdentifier: 
   LevelBatches:
-  - Levels:
-    - completionStatus: 0
+  - show: 0
+    Levels:
+    - show: 0
+      completionStatus: 0
       Pics:
-      - {fileID: 21300000, guid: db39aeb895dff2e43a82015362343483, type: 3}
-      - {fileID: 21300000, guid: 8979e0585c13f1d4bbd101c48fd0ddf7, type: 3}
-      - {fileID: 21300000, guid: 32debc483d4ad2544a495861a90754d8, type: 3}
-      - {fileID: 21300000, guid: 62fb8b8c456ed0f40a016a3875e295f6, type: 3}
-      Word: train
-      OtherChars: 6100620074006300720068006a0069007a00730065006e00
-    - completionStatus: 0
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      Word: 
+      AnsweredLetters: 
+      RemovedLetters: 000000000000000000000000
+      OtherChars: 000000000000000000000000000000000000000000000000
+  - show: 0
+    Levels:
+    - show: 0
+      completionStatus: 0
       Pics:
-      - {fileID: 21300000, guid: db39aeb895dff2e43a82015362343483, type: 3}
-      - {fileID: 21300000, guid: 8979e0585c13f1d4bbd101c48fd0ddf7, type: 3}
-      - {fileID: 21300000, guid: 32debc483d4ad2544a495861a90754d8, type: 3}
-      - {fileID: 21300000, guid: 62fb8b8c456ed0f40a016a3875e295f6, type: 3}
-      Word: traic
-      OtherChars: 6100620074006300720068006a0069007a00730065006e00
-    - completionStatus: 0
-      Pics:
-      - {fileID: 21300000, guid: db39aeb895dff2e43a82015362343483, type: 3}
-      - {fileID: 21300000, guid: 8979e0585c13f1d4bbd101c48fd0ddf7, type: 3}
-      - {fileID: 21300000, guid: 32debc483d4ad2544a495861a90754d8, type: 3}
-      - {fileID: 21300000, guid: 62fb8b8c456ed0f40a016a3875e295f6, type: 3}
-      Word: crane
-      OtherChars: 6100620074006300720068006a0069007a00730065006e00
-  - Levels:
-    - completionStatus: 0
-      Pics:
-      - {fileID: 21300000, guid: db39aeb895dff2e43a82015362343483, type: 3}
-      - {fileID: 21300000, guid: 8979e0585c13f1d4bbd101c48fd0ddf7, type: 3}
-      - {fileID: 21300000, guid: 32debc483d4ad2544a495861a90754d8, type: 3}
-      - {fileID: 21300000, guid: 62fb8b8c456ed0f40a016a3875e295f6, type: 3}
-      Word: abcse
-      OtherChars: 6100620074006300720068006a0069007a00730065006e00
-    - completionStatus: 0
-      Pics:
-      - {fileID: 21300000, guid: db39aeb895dff2e43a82015362343483, type: 3}
-      - {fileID: 21300000, guid: 8979e0585c13f1d4bbd101c48fd0ddf7, type: 3}
-      - {fileID: 21300000, guid: 32debc483d4ad2544a495861a90754d8, type: 3}
-      - {fileID: 21300000, guid: 62fb8b8c456ed0f40a016a3875e295f6, type: 3}
-      Word: ancse
-      OtherChars: 6100620074006300720068006a0069007a00730065006e00
-    - completionStatus: 0
-      Pics:
-      - {fileID: 21300000, guid: db39aeb895dff2e43a82015362343483, type: 3}
-      - {fileID: 21300000, guid: 8979e0585c13f1d4bbd101c48fd0ddf7, type: 3}
-      - {fileID: 21300000, guid: 32debc483d4ad2544a495861a90754d8, type: 3}
-      - {fileID: 21300000, guid: 62fb8b8c456ed0f40a016a3875e295f6, type: 3}
-      Word: atsce
-      OtherChars: 6100620074006300720068006a0069007a00730065006e00
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      Word: 
+      AnsweredLetters: 
+      RemovedLetters: 000000000000000000000000
+      OtherChars: 000000000000000000000000000000000000000000000000
+  MaxBatches: 10
+  MaxLevelsInBatches: 10
