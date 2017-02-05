@@ -12,6 +12,7 @@ namespace States.Answers
 	{
 		Lettered,
 		NotLettered,
+		Answered,
 		Disabled,
 		Default,
 	}
@@ -85,13 +86,15 @@ namespace States.Answers
 
 				case AnswerButtonStates.NotLettered:
 					break;
-
+					
+				case AnswerButtonStates.Answered:
+					break;
+					
 				case AnswerButtonStates.Disabled:
 					break;
 
 				case AnswerButtonStates.Default:
 					break;
-
 				default:
 					Debug.Log ( "We Have a Problem" );
 					break;
