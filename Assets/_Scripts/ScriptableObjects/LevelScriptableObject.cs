@@ -143,5 +143,24 @@ namespace SO.Levels
 		public List <LevelBatch> LevelBatches;
 
 		public static int MaxLevels = 10;
+
+		public int MaxBatches = 10;
+
+		public int MaxLevelsInBatches = 10;
+
+		public void AddBatch ()
+		{
+			LevelBatches.Add ( new LevelBatch () );
+		}
+
+		public void DeleteBatch ( int batchIndex )
+		{
+			LevelBatches.RemoveAt ( batchIndex );
+		}
+
+		public void ResetBatch ( int batchIndex )
+		{
+			LevelBatches [ batchIndex ] = new LevelBatch ();
+		}
 	}
 }
