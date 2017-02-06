@@ -85,7 +85,7 @@ namespace SO.Levels
 		{
 			Pics.Clear ();
 
-			for ( int i = 0; i < 12; i++ )
+			for ( int i = 0; i < 4; i++ )
 			{
 				Pics.Add ( default (Sprite) );
 
