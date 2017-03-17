@@ -11,6 +11,8 @@ namespace Managers
 
 	public class AnswerTextManager : MonoBehaviour
 	{
+		public AudioManager AudioManRef;
+
 		[SerializeField]
 		string answerWord;
 
@@ -32,9 +34,14 @@ namespace Managers
 		[SerializeField]
 		List<AnswerButtonStateManager> answerButtonReferences;
 
+		public delegate void ButtonPress ();
+
+		public static event ButtonPress OnOptionButtonPress;
+		public static event ButtonPress OnAnswerButtonPress;
+
 		public delegate void LevelComplete ();
 
-		public event LevelComplete OnLevelComplete;
+		public static event LevelComplete OnLevelComplete;
 
 		/*	Fnction to add a new Letter to the Typed string.
 		 * 
@@ -91,7 +98,15 @@ namespace Managers
 			optionButtonReferences [ indexToInsert ] = senderManager;
 			answerButtonReferences [ indexToInsert ].AssignLetter ( newLetter );
 
-			CheckTypedLetters ();
+			if ( !typedLetters.Contains ( '\0' ) )
+			{
+				CheckTypedLetters ();
+			}
+
+			if ( OnOptionButtonPress != null )
+			{
+				OnOptionButtonPress ();
+			}
 
 			return true;
 
@@ -104,28 +119,35 @@ namespace Managers
 			optionButtonReferences [ siblingIndex ].ResetClickedStatus ();
 			optionButtonReferences [ siblingIndex ] = default (OptionButtonStateManager);
 			typedLetters [ siblingIndex ] = default (char);
+
+			if ( OnAnswerButtonPress != null )
+			{
+				OnAnswerButtonPress ();
+			}
+
 		}
 
 		public void CheckTypedLetters ()
 		{
-
 			bool correctAnswer = true;
-
 			for ( int letterIndex = 0; letterIndex < answerWord.Length; letterIndex++ )
 			{
-				correctAnswer = answerWord [ letterIndex ].Equals ( typedLetters [ letterIndex ] );
+				correctAnswer = !answerWord [ letterIndex ].Equals ( '\0' ) & answerWord [ letterIndex ].Equals ( typedLetters [ letterIndex ] );
 				if ( !correctAnswer )
 				{
-					Debug.Log ( "Letter Mismatch at\t" + letterIndex.ToString () + "\tLetters are\t\t" +
-						answerWord [ letterIndex ].ToString () + "\t" + typedLetters [ letterIndex ] );
+					Debug.Log ( string.Format ( "Letter Mismatch at\t{0}\tLetters are\t{1} and {2}.", letterIndex, answerWord [ letterIndex ], typedLetters [ letterIndex ] )
+								/* was the following. Used Format instead
+								"Letter Mismatch at\t" + letterIndex.ToString () + "\tLetters are\t\t" + 
+								answerWord [ letterIndex ].ToString () + "\t" + typedLetters [ letterIndex ]
+								*/
+					);
 					break;
 				}
 			}
 
 			if ( correctAnswer )
 			{
-				//Next Level;
-
+				
 				if ( OnLevelComplete != null )
 				{
 					OnLevelComplete ();
@@ -139,9 +161,8 @@ namespace Managers
 			if ( !correctAnswer )
 			{
 				//Next Level;
-				Debug.Log ( "Sorry Man your at a LOSS." );
+				Debug.Log ( "Sorry Man you are at a LOSS." );
 			}
-
 		}
 
 		public void AddNewAnswerButtonsReference ( Transform answerButtonParent )
