@@ -6,11 +6,16 @@ using System.Collections.Generic;
 using States.Options;
 using States.Answers;
 
+using SO.Money;
+
 namespace Managers
 {
 
 	public class AnswerTextManager : MonoBehaviour
 	{
+		[SerializeField]
+		private MoneyScriptableObject MSO;
+
 		public AudioManager AudioManRef;
 
 		[SerializeField]
@@ -147,7 +152,7 @@ namespace Managers
 
 			if ( correctAnswer )
 			{
-				
+				MSO.IncreaseMoneyOnLevelCleared ();
 				if ( OnLevelComplete != null )
 				{
 					OnLevelComplete ();
