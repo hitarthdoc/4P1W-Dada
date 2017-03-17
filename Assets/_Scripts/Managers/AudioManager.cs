@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿#undef TESTING
+
+using UnityEngine;
 using System.Collections;
 
 using States.Answers;
@@ -59,7 +61,9 @@ namespace Managers
 
 		public void PlayCommonUIButtonSound ()
 		{
+			#if TESTING
 			Debug.Log ( "Playing UIButtonPress" );
+			#endif
 
 			if ( UIButtonPress != null )
 			{
@@ -70,7 +74,9 @@ namespace Managers
 
 		public void PlayCorrectAnswerSound ()
 		{
+			#if TESTING
 			Debug.Log ( "Playing CorrectAnswer" );
+			#endif
 
 			if ( CorrectAnswer != null )
 			{
@@ -81,7 +87,9 @@ namespace Managers
 
 		public void PlayIncorrectAnswerSound ()
 		{
+			#if TESTING
 			Debug.Log ( "Playing IncorrectAnswer" );
+			#endif
 
 			if ( IncorrectAnswer != null )
 			{
@@ -95,7 +103,9 @@ namespace Managers
 
 			if ( NextQuestion != null )
 			{
+			#if TESTING
 				Debug.Log ( "Playing NextQuestion" );
+			#endif
 				UIAudioSource.PlayOneShot ( NextQuestion );
 			}
 
@@ -110,7 +120,9 @@ namespace Managers
 
 		void PlayAnswerUIButtonSound ()
 		{
+			#if TESTING
 			Debug.Log ( "Answer Delegate working" );
+			#endif
 
 			if ( AnswerButtonPress != null )
 			{
@@ -128,7 +140,9 @@ namespace Managers
 
 		void PlayOptionUIButtonSound ()
 		{
+			#if TESTING
 			Debug.Log ( "Option Delegate working" );
+			#endif
 
 			if ( OptionButtonPress != null )
 			{
@@ -139,7 +153,9 @@ namespace Managers
 
 		public void PlayHintImageOutUIButtonSound ()
 		{
+			#if TESTING
 			Debug.Log ( "ImageOut Delegate working" );
+			#endif
 
 			if ( ImageOutButtonPress != null )
 			{
@@ -150,7 +166,9 @@ namespace Managers
 
 		public void PlayHintImageInUIButtonSound ()
 		{
+			#if TESTING
 			Debug.Log ( "ImageIn Delegate working" );
+			#endif
 
 			if ( ImageInButtonPress != null )
 			{
@@ -161,8 +179,10 @@ namespace Managers
 
 		public void ChangeMuteState ( bool state )
 		{
-			UIAudioSource.mute = state;
+			#if TESTING
 			Debug.Log (string.Format ("Mute State:\t{0}", UIAudioSource.mute));
+			#endif
+			UIAudioSource.mute = state;
 		}
 	}
 
