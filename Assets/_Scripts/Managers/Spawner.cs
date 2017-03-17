@@ -37,6 +37,9 @@ namespace Managers
 		UIManager UIManReference;
 
 		[SerializeField]
+		AudioManager AudioManReference;
+
+		[SerializeField]
 		GridLayoutGroup Layout_7AndLess;
 
 		[SerializeField]
@@ -75,16 +78,20 @@ namespace Managers
 
 		void OnEnable ()
 		{
-			ATManReference.OnLevelComplete += GetAndSpawnNextLevel;
+//			ATManReference.OnLevelComplete += GetAndSpawnNextLevel;
 
 			UIManReference.OnStartGame += SpawnCurrentLevel;
+
+			UIManReference.OnStartNextLevel += GetAndSpawnNextLevel;
 		}
 
 		void OnDisable ()
 		{
-			ATManReference.OnLevelComplete -= GetAndSpawnNextLevel;
+//			ATManReference.OnLevelComplete -= GetAndSpawnNextLevel;
 
 			UIManReference.OnStartGame -= SpawnCurrentLevel;
+
+			UIManReference.OnStartNextLevel -= GetAndSpawnNextLevel;
 		}
 
 		private void SpawnCurrentLevel ()
@@ -105,12 +112,17 @@ namespace Managers
 				{
 					GameObject newImageReference = Instantiate ( ImagePrefab, ImagesHolder ) as GameObject;
 					newImageReference.GetComponent <Image> ().sprite = image;
+
+					newImageReference.GetComponent <RectTransform> ().localScale = Vector3.one;
+
 					AttachListener ( newImageReference.GetComponent <Button> (), 1, Convert.ToChar ( imageIndex++ ) );
 				}
 
 				foreach ( char optionLetter in CurrentLevel.OtherChars )
 				{
 					GameObject newOptionButtonReference = Instantiate ( OptionLetterButtonPrefab, OptionButtonsHolder ) as GameObject;
+
+					newOptionButtonReference.GetComponent <RectTransform> ().localScale = Vector3.one;
 
 					OptionButtonStateManager tempRef = newOptionButtonReference.GetComponent <OptionButtonStateManager> ();
 
@@ -122,14 +134,15 @@ namespace Managers
 					//	AttachListener ( newOptionButtonReference.GetComponent <Button> (), 1, optionLetter );
 
 				}
-
-				foreach ( char answerLetter in CurrentLevel.Word )
+				Profiler.BeginSample ( "Spawnig Answers", this );
 				{
-					GameObject newAnswerButtonReference = Instantiate ( AnswerLetterButtonPrefab, AnswerButtonsHolder ) as GameObject;
+					foreach ( char answerLetter in CurrentLevel.Word )
+					{
+						GameObject newAnswerButtonReference = Instantiate ( AnswerLetterButtonPrefab, AnswerButtonsHolder ) as GameObject;
 
-					AnswerButtonStateManager tempRef = newAnswerButtonReference.GetComponent <AnswerButtonStateManager> ();
+						newAnswerButtonReference.GetComponent <RectTransform> ().localScale = Vector3.one;
 
-					tempRef.AssignReferences ( IPManReference, ATManReference );
+						AnswerButtonStateManager tempRef = newAnswerButtonReference.GetComponent <AnswerButtonStateManager> ();
 
 						tempRef.AssignReferences ( IPManReference, ATManReference );
 
@@ -137,7 +150,10 @@ namespace Managers
 						//	newOptionButtonReference.GetComponentInChildren <Text> ().text = optionLetter.ToString ();
 						//	AttachListener ( newOptionButtonReference.GetComponent <Button> (), 1, optionLetter );
 
+					}
+//					Debug.Break ();
 				}
+				Profiler.EndSample ();
 
 				GridLayoutGroup tempRefForAnswerButtonsHolder = AnswerButtonsHolder.GetComponent <GridLayoutGroup> ();
 
@@ -201,8 +217,15 @@ namespace Managers
 						delegate
 						{
 							UIManReference.OnSmallImagePressed ( Convert.ToInt32 ( argutmentToPass ) );
+							AudioManReference.PlayHintImageOutUIButtonSound ();
 						}
 					);
+//					attachToThis.onClick.AddListener ( 
+//					                                  delegate
+//						{
+//							AudioManReference.PlayHintImageOutUIButtonSound ();
+//						}
+//					                                 );
 					break;
 
 				case 2:
