@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿#undef TESTING
+
+using UnityEngine;
 using System.Collections;
 
 using System.Collections.Generic;
@@ -15,7 +17,14 @@ namespace SO.Progress
 
 		// Should always Initialize with "0". ONLY ON First App Launch;
 		[SerializeField]
-		int CurrentLevel = 0;
+		int currentLevel = 0;
+
+		public int CurrentLevel {
+			get
+			{
+				return currentLevel;
+			}
+		}
 
 		// Should always Initialize with "0". ONLY ON First App Launch;
 		[SerializeField]
@@ -40,7 +49,9 @@ namespace SO.Progress
 			{
 				LevelIndicesToSelectFromCurrentBatch.Add ( i );
 			}
+			#if TESTING
 			Debug.Log ( "Here First" );
+			#endif
 			return true;
 		}
 
@@ -59,7 +70,7 @@ namespace SO.Progress
 
 			IncreaseCurrentLevel ();
 
-			if ( CurrentLevel >= LevelScriptableObject.MaxLevels )
+			if ( currentLevel >= LevelScriptableObject.MaxLevels )
 			{
 //				Managers.GameManager.GameOver ();
 //				CurrentLevel %= LevelScriptableObject.MaxLevels;
@@ -74,7 +85,9 @@ namespace SO.Progress
 				{
 				}
 			}
+			#if TESTING
 			Debug.Log ( "Should Be here Second" );
+			#endif
 			int randomIndex = Random.Range ( 0, LevelIndicesToSelectFromCurrentBatch.Count );
 			CurrentLevelIndexInBatch = LevelIndicesToSelectFromCurrentBatch [ randomIndex ];
 			LevelIndicesToSelectFromCurrentBatch.RemoveAt ( randomIndex );
@@ -89,7 +102,7 @@ namespace SO.Progress
 		*/
 		public Level GetCurrentLevelToSpawn ()
 		{
-			if ( CurrentLevel != 0 )
+			if ( currentLevel != 0 )
 			{
 				return LSO.LevelBatches [ CurrentBatch ].Levels [ CurrentLevelIndexInBatch ];
 			}
@@ -101,7 +114,7 @@ namespace SO.Progress
 
 		public void IncreaseCurrentLevel ()
 		{
-			CurrentLevel++;
+			currentLevel++;
 		}
 
 	}
