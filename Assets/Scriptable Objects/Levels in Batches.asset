@@ -15,7 +15,7 @@ MonoBehaviour:
   - show: 1
     locked: 0
     Levels:
-    - show: 1
+    - show: 0
       locked: 0
       completionStatus: 0
       Pics:
@@ -24,10 +24,11 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 32debc483d4ad2544a495861a90754d8, type: 3}
       - {fileID: 21300000, guid: 62fb8b8c456ed0f40a016a3875e295f6, type: 3}
       Word: train
+      Word2: ing
       AnsweredLetters: 0000000000
       RemovedLetters: 000000000000000000000000
       OtherChars: 74007200610069006e006100620063007300650064007900
-    - show: 1
+    - show: 0
       locked: 0
       completionStatus: 0
       Pics:
@@ -36,6 +37,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 8979e0585c13f1d4bbd101c48fd0ddf7, type: 3}
       - {fileID: 21300000, guid: 62fb8b8c456ed0f40a016a3875e295f6, type: 3}
       Word: pratikraman
+      Word2: 
       AnsweredLetters: 0000000000000000000000
       RemovedLetters: 000000000000000000000000
       OtherChars: 700072006100740069006b00720061006d006e0061006900
@@ -51,6 +53,7 @@ MonoBehaviour:
       - {fileID: 0}
       - {fileID: 0}
       Word: 
+      Word2: 
       AnsweredLetters: 
       RemovedLetters: 000000000000000000000000
       OtherChars: 000000000000000000000000000000000000000000000000

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: ProgressScriptableObject
   m_EditorClassIdentifier: 
   LSO: {fileID: 11400000, guid: 1b6d233c2f2e9df47a4d4df4ca91dd1b, type: 2}
-  CurrentLevel: 0
+  currentLevel: 0
   CurrentBatch: -1
   CurrentLevelIndexInBatch: 0
   LevelIndicesToSelectFromCurrentBatch: 
