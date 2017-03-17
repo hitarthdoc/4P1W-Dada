@@ -54,9 +54,13 @@ namespace Managers
 
 		public GameObject AnswerLetterButtonPrefab;
 
+		public GameObject AnswerSuffixPrefab;
+
 		public Transform ImagesHolder;
 
 		public Transform AnswerButtonsHolder;
+
+		public Transform AnswerSuffixHolder;
 
 		public Transform OptionButtonsHolder;
 
@@ -135,6 +139,7 @@ namespace Managers
 					//	AttachListener ( newOptionButtonReference.GetComponent <Button> (), 1, optionLetter );
 
 				}
+
 				Profiler.BeginSample ( "Spawnig Answers", this );
 				{
 					foreach ( char answerLetter in CurrentLevel.Word )
@@ -156,35 +161,79 @@ namespace Managers
 				}
 				Profiler.EndSample ();
 
-				GridLayoutGroup tempRefForAnswerButtonsHolder = AnswerButtonsHolder.GetComponent <GridLayoutGroup> ();
+				GridLayoutGroup tempRefForGLG = AnswerButtonsHolder.GetComponent <GridLayoutGroup> ();
 
 				if ( CurrentLevel.Word.Length <= 7 )
 				{
-					ChangeGridLayoutGroupProperties ( Layout_7AndLess, ref tempRefForAnswerButtonsHolder );
+					ChangeGridLayoutGroupProperties ( Layout_7AndLess, ref tempRefForGLG );
 //					tempRefForAnswerButtonsHolder = Layout_7AndLess.GetComponent <GridLayoutGroup> ();
 				}
 				else
 				if ( CurrentLevel.Word.Length <= 10 )
 				{
-					ChangeGridLayoutGroupProperties ( Layout_8To10, ref tempRefForAnswerButtonsHolder );
+					ChangeGridLayoutGroupProperties ( Layout_8To10, ref tempRefForGLG );
 //					tempRefForAnswerButtonsHolder = Layout_8To10.GetComponent <GridLayoutGroup> ();
 
 				}
 				else
 				if ( CurrentLevel.Word.Length <= 12 )
 				{
-					ChangeGridLayoutGroupProperties ( Layout_11And12, ref tempRefForAnswerButtonsHolder );
+					ChangeGridLayoutGroupProperties ( Layout_11And12, ref tempRefForGLG );
 //					tempRefForAnswerButtonsHolder = Layout_11And12.GetComponent <GridLayoutGroup> ();
 
 				}
 				else
 				{
-					ChangeGridLayoutGroupProperties ( Layout_11And12, ref tempRefForAnswerButtonsHolder );
+					ChangeGridLayoutGroupProperties ( Layout_11And12, ref tempRefForGLG );
 //					tempRefForAnswerButtonsHolder = Layout_11And12.GetComponent <GridLayoutGroup> ();
 					Debug.Log ( "WE have a VERYYYY BIIIIGGGG WORD." );
 				}
 
+				if ( CurrentLevel.Word2.Length > 0 )
+				{
+					foreach ( char suffixLetter in CurrentLevel.Word2 )
+					{
+						GameObject newAnswerSuffixReference = Instantiate ( AnswerSuffixPrefab, AnswerSuffixHolder ) as GameObject;
 
+						newAnswerSuffixReference.GetComponent <RectTransform> ().localScale = Vector3.one;
+
+						newAnswerSuffixReference.GetComponentInChildren <Text> ().text = suffixLetter.ToString ();
+
+						//	Removed both as Now it is done by OBSM.
+						//	newOptionButtonReference.GetComponentInChildren <Text> ().text = optionLetter.ToString ();
+						//	AttachListener ( newOptionButtonReference.GetComponent <Button> (), 1, optionLetter );
+
+					}
+				}
+
+				tempRefForGLG = AnswerSuffixHolder.GetComponent <GridLayoutGroup> ();
+
+				if ( CurrentLevel.Word.Length <= 7 )
+				{
+					ChangeGridLayoutGroupProperties ( Layout_7AndLess, ref tempRefForGLG );
+//					tempRefForAnswerButtonsHolder = Layout_7AndLess.GetComponent <GridLayoutGroup> ();
+				}
+				else
+				if ( CurrentLevel.Word.Length <= 10 )
+				{
+					ChangeGridLayoutGroupProperties ( Layout_8To10, ref tempRefForGLG );
+//						tempRefForAnswerButtonsHolder = Layout_8To10.GetComponent <GridLayoutGroup> ();
+
+				}
+				else
+				if ( CurrentLevel.Word.Length <= 12 )
+				{
+					ChangeGridLayoutGroupProperties ( Layout_11And12, ref tempRefForGLG );
+//							tempRefForAnswerButtonsHolder = Layout_11And12.GetComponent <GridLayoutGroup> ();
+
+				}
+				else
+				{
+					ChangeGridLayoutGroupProperties ( Layout_11And12, ref tempRefForGLG );
+//							tempRefForAnswerButtonsHolder = Layout_11And12.GetComponent <GridLayoutGroup> ();
+					Debug.Log ( "WE have a VERYYYY BIIIIGGGG WORD." );
+				}
+				
 				StartCoroutine ( "ATMAddNewAnswerButtonsCaller" );
 			}
 
@@ -252,6 +301,8 @@ namespace Managers
 
 			AnswerButtonsHolder.GetComponent <GridLayoutGroup> ().enabled = false;
 
+			AnswerSuffixHolder.GetComponent <GridLayoutGroup> ().enabled = false;
+
 			OptionButtonsHolder.GetComponent <GridLayoutGroup> ().enabled = false;
 
 			for ( int i = 0; i < ImagesHolder.childCount; i++ )
@@ -264,6 +315,11 @@ namespace Managers
 				Destroy ( AnswerButtonsHolder.GetChild ( i ).gameObject );
 			}
 
+			for ( int i = 0; i < AnswerSuffixHolder.childCount; i++ )
+			{
+				Destroy ( AnswerSuffixHolder.GetChild ( i ).gameObject );
+			}
+
 			for ( int i = 0; i < OptionButtonsHolder.childCount; i++ )
 			{
 				OptionButtonsHolder.GetChild ( i ).GetComponent <Button> ().onClick.RemoveAllListeners ();
@@ -273,6 +329,8 @@ namespace Managers
 			ImagesHolder.GetComponent <GridLayoutGroup> ().enabled = true;
 
 			AnswerButtonsHolder.GetComponent <GridLayoutGroup> ().enabled = true;
+
+			AnswerSuffixHolder.GetComponent <GridLayoutGroup> ().enabled = true;
 
 			OptionButtonsHolder.GetComponent <GridLayoutGroup> ().enabled = true;
 
