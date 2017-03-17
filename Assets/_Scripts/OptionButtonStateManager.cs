@@ -38,6 +38,10 @@ namespace States.Options
 		[SerializeField]
 		Text textComponent;
 
+		public delegate void OnClickedDelegate ();
+
+		public OnClickedDelegate OnClickEvent;
+
 		// Use this for initialization before Start
 		void Awake ()
 		{
@@ -81,6 +85,11 @@ namespace States.Options
 
 		void OnClick ()
 		{
+			if ( OnClickEvent != null )
+			{
+				OnClickEvent ();
+			}
+
 			switch ( currentButtonState )
 			{
 				
