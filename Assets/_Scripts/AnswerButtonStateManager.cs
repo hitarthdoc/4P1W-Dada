@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿#define ENABLE_PROFILER
+
+using UnityEngine;
 using System.Collections;
 
 using UnityEngine.UI;
@@ -39,6 +41,10 @@ namespace States.Answers
 		[SerializeField]
 		Text textComponent;
 
+		public delegate void OnClickedDelegate ();
+
+		public OnClickedDelegate OnClickEvent;
+
 		// Use this for initialization before Start
 		void Awake ()
 		{
@@ -66,14 +72,34 @@ namespace States.Answers
 			textComponent.text = letter.ToString ();
 		}
 
+		public void AssignReferences ( InputManager newIPManRef, AnswerTextManager newATManRef, AudioManager audioManRef )
+		{
+			Profiler.BeginSample ( "AssignReferences Load" );
+			{
+				IPManReference = newIPManRef;
+				ATManReference = newATManRef;
+				audioManRef.RegisterAnswerButton ( this );
+			}
+			Profiler.EndSample ();
+		}
+
 		public void AssignReferences ( InputManager newIPManRef, AnswerTextManager newATManRef )
 		{
-			IPManReference = newIPManRef;
-			ATManReference = newATManRef;
+			Profiler.BeginSample ( "AssignReferences Load" );
+			{
+				IPManReference = newIPManRef;
+				ATManReference = newATManRef;
+			}
+			Profiler.EndSample ();
 		}
 
 		void OnClick ()
 		{
+			if ( OnClickEvent != null )
+			{
+				OnClickEvent ();
+			}
+
 			switch ( currentButtonState )
 			{
 
