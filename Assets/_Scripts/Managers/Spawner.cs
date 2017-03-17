@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿#define ENABLE_PROFILER
+
+using UnityEngine;
 using System.Collections;
 
 using UnityEngine.UI;
@@ -129,9 +131,11 @@ namespace Managers
 
 					tempRef.AssignReferences ( IPManReference, ATManReference );
 
-					//	Removed both as Now it is done by OBSM.
-					//	newOptionButtonReference.GetComponentInChildren <Text> ().text = optionLetter.ToString ();
-					//	AttachListener ( newOptionButtonReference.GetComponent <Button> (), 1, optionLetter );
+						tempRef.AssignReferences ( IPManReference, ATManReference );
+
+						//	Removed both as Now it is done by OBSM.
+						//	newOptionButtonReference.GetComponentInChildren <Text> ().text = optionLetter.ToString ();
+						//	AttachListener ( newOptionButtonReference.GetComponent <Button> (), 1, optionLetter );
 
 				}
 
@@ -142,13 +146,15 @@ namespace Managers
 					ChangeGridLayoutGroupProperties ( Layout_7AndLess, ref tempRefForAnswerButtonsHolder );
 //					tempRefForAnswerButtonsHolder = Layout_7AndLess.GetComponent <GridLayoutGroup> ();
 				}
-				else if ( CurrentLevel.Word.Length <= 10 )
+				else
+				if ( CurrentLevel.Word.Length <= 10 )
 				{
 					ChangeGridLayoutGroupProperties ( Layout_8To10, ref tempRefForAnswerButtonsHolder );
 //					tempRefForAnswerButtonsHolder = Layout_8To10.GetComponent <GridLayoutGroup> ();
 
 				}
-				else if ( CurrentLevel.Word.Length <= 12 )
+				else
+				if ( CurrentLevel.Word.Length <= 12 )
 				{
 					ChangeGridLayoutGroupProperties ( Layout_11And12, ref tempRefForAnswerButtonsHolder );
 //					tempRefForAnswerButtonsHolder = Layout_11And12.GetComponent <GridLayoutGroup> ();
@@ -158,7 +164,7 @@ namespace Managers
 				{
 					ChangeGridLayoutGroupProperties ( Layout_11And12, ref tempRefForAnswerButtonsHolder );
 //					tempRefForAnswerButtonsHolder = Layout_11And12.GetComponent <GridLayoutGroup> ();
-					Debug.Log ("WE have a VERYYYY BIIIIGGGG WORD.");
+					Debug.Log ( "WE have a VERYYYY BIIIIGGGG WORD." );
 				}
 
 
@@ -259,7 +265,7 @@ namespace Managers
 			return CurrentLevel.Pics [ index ];
 		}
 
-		void ChangeGridLayoutGroupProperties (GridLayoutGroup fromGLG, ref GridLayoutGroup toGLG)
+		void ChangeGridLayoutGroupProperties ( GridLayoutGroup fromGLG, ref GridLayoutGroup toGLG )
 		{
 //			toGLG = fromGLG;
 //			Debug.Log ("I did reach here.\t" + fromGLG.cellSize.ToString ());

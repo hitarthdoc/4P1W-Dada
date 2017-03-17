@@ -8,6 +8,7 @@ namespace Managers
 	{
 
 		public delegate void EscapePressed ();
+
 		public static event EscapePressed OnEscapePressed;
 
 		// Use this for initialization
@@ -19,9 +20,9 @@ namespace Managers
 		// Update is called once per frame
 		void Update ()
 		{
-			if (Input.GetKeyDown (KeyCode.Escape))
+			if ( Input.GetKeyDown ( KeyCode.Escape ) )
 			{
-				if (OnEscapePressed != null)
+				if ( OnEscapePressed != null )
 				{
 					OnEscapePressed ();
 				}

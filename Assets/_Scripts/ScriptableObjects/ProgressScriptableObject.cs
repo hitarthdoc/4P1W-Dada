@@ -40,7 +40,7 @@ namespace SO.Progress
 			{
 				LevelIndicesToSelectFromCurrentBatch.Add ( i );
 			}
-			Debug.Log ("Here First");
+			Debug.Log ( "Here First" );
 			return true;
 		}
 
@@ -74,7 +74,7 @@ namespace SO.Progress
 				{
 				}
 			}
-			Debug.Log ("Should Be here Second");
+			Debug.Log ( "Should Be here Second" );
 			int randomIndex = Random.Range ( 0, LevelIndicesToSelectFromCurrentBatch.Count );
 			CurrentLevelIndexInBatch = LevelIndicesToSelectFromCurrentBatch [ randomIndex ];
 			LevelIndicesToSelectFromCurrentBatch.RemoveAt ( randomIndex );
