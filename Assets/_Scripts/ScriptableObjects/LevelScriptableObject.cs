@@ -24,6 +24,8 @@ namespace SO.Levels
 
 		public 	string Word = "train";
 
+		public 	string Word2 = "";
+
 		public List <bool> AnsweredLetters = new List<bool> ( 5 );
 
 		public List <bool> RemovedLetters = new List<bool> ( 12 );
@@ -43,6 +45,7 @@ namespace SO.Levels
 		public void ClearWord ()
 		{
 			Word = "";
+			Word2 = "";
 			ClearAnswered ();
 
 		}
@@ -78,7 +81,6 @@ namespace SO.Levels
 			for ( int i = 0; i < Word.Length; i++ )
 			{
 				AnsweredLetters.Add ( default (bool) );
-
 			}
 
 		}
@@ -86,11 +88,9 @@ namespace SO.Levels
 		public void ClearSelectedPictures ()
 		{
 			Pics.Clear ();
-
 			for ( int i = 0; i < 04; i++ )
 			{
 				Pics.Add ( default (Sprite) );
-
 			}
 
 		}

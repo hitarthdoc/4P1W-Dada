@@ -70,10 +70,11 @@ namespace Managers
 
 		}
 
+
 		// Use this for initialization
 		void Start ()
 		{
-//			SpawnCurrentLevel ();
+	
 		}
 
 		void OnEnable ()
@@ -299,6 +300,7 @@ namespace Managers
 
 //			Debug.Log ("I did reach here.\t" + toGLG.cellSize.ToString ());
 		}
+
 
 	}
 }
