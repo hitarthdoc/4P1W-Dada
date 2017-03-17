@@ -11,6 +11,8 @@ namespace SO.Levels
 	{
 		public bool show = false;
 
+		public bool locked = false;
+
 		[SerializeField]
 		private bool completionStatus = false;
 
@@ -85,7 +87,7 @@ namespace SO.Levels
 		{
 			Pics.Clear ();
 
-			for ( int i = 0; i < 12; i++ )
+			for ( int i = 0; i < 04; i++ )
 			{
 				Pics.Add ( default (Sprite) );
 
@@ -111,6 +113,8 @@ namespace SO.Levels
 	public class LevelBatch
 	{
 		public bool show = false;
+
+		public bool locked = false;
 
 		public List <Level> Levels = new List<Level> ( 10 );
 
