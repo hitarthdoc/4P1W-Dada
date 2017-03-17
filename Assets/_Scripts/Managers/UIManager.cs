@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 using UnityEngine.Audio;
 
+using SO.Progress;
+using SO.Money;
+
 namespace Managers
 {
 
@@ -33,6 +36,12 @@ namespace Managers
 			Default
 		}
 
+		[SerializeField]
+		private ProgressScriptableObject PSO;
+
+		[SerializeField]
+		private MoneyScriptableObject MSO;
+
 		public GameObject MainMenu;
 
 		public GameObject PlayScreen;
@@ -44,6 +53,10 @@ namespace Managers
 		public GameObject ExitPanel;
 
 		public GameObject BigImagePanel;
+
+		public Text CurrentLevelText;
+
+		public Text CoinsText;
 
 		public Image BigImageReference;
 
@@ -101,6 +114,9 @@ namespace Managers
 			AnswerTextManager.OnLevelComplete += ToLevelCompletePanel;
 
 			InputManager.OnEscapePressed += EscapePressed;
+
+			OnStartGame += UpdateUI;
+
 		}
 
 		void OnDisable ()
@@ -108,6 +124,9 @@ namespace Managers
 			AnswerTextManager.OnLevelComplete -= ToLevelCompletePanel;
 
 			InputManager.OnEscapePressed -= EscapePressed;
+
+			OnStartGame -= UpdateUI;
+
 		}
 
 		public void NoMenus ()
@@ -213,6 +232,12 @@ namespace Managers
 			}
 
 			PlaySound ( nextLevelButton );
+		}
+
+		void UpdateUI ()
+		{
+			CurrentLevelText.text = PSO.CurrentLevel.ToString ();
+			CoinsText.text = MSO.MoneyEarned.ToString ();
 		}
 
 		public void SoundToggle ( bool SoundEnabled )
