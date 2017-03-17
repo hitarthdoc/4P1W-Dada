@@ -48,7 +48,6 @@ public class LevelScriptEditor : Editor
 			{
 				batch.show = EditorGUILayout.Foldout ( batch.show, "Batch:\t" + batchIndex.ToString () );
 
-				batch.locked = EditorGUILayout.Toggle ( "Locked:", batch.locked );
 				if ( !batch.locked )
 				{
 					
@@ -71,6 +70,7 @@ public class LevelScriptEditor : Editor
 						}
 					}
 				}
+				batch.locked = EditorGUILayout.Toggle ( "Locked:", batch.locked );
 				batchIndex++;
 			}
 			EditorGUILayout.EndHorizontal ();
@@ -138,7 +138,7 @@ public class LevelScriptEditor : Editor
 //
 //							Rect levelLockOption = EditorGUILayout.BeginHorizontal ();
 //							{
-							level.locked = EditorGUILayout.Toggle ( "Locked:", level.locked, rightAlignment );
+							level.locked = EditorGUILayout.Toggle ( "Locked:", level.locked );
 //							}
 //							EditorGUILayout.EndHorizontal ();
 
@@ -159,14 +159,30 @@ public class LevelScriptEditor : Editor
 									if ( !level.Word.Equals ( word ) )
 									{
 										level.ClearAnswered ();
-									
+
 									}
 									if ( !level.locked )
 									{
-										
+
 										if ( GUILayout.Button ( "Clear Answer" ) )
 										{
 											level.ClearWord ();
+											//Debug.Log ( "Here" );
+										}
+									}
+								}
+								EditorGUILayout.EndHorizontal ();
+
+								Rect suffixRectHori = EditorGUILayout.BeginHorizontal ();
+								{
+									level.Word2 = EditorGUILayout.TextField ( "Suffix:", level.Word2 );
+
+									if ( !level.locked )
+									{
+
+										if ( GUILayout.Button ( "Clear Suffix" ) )
+										{
+											level.ClearSuffix ();
 											//Debug.Log ( "Here" );
 										}
 									}
