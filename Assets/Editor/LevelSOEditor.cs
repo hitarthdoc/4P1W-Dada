@@ -48,25 +48,29 @@ public class LevelScriptEditor : Editor
 			{
 				batch.show = EditorGUILayout.Foldout ( batch.show, "Batch:\t" + batchIndex.ToString () );
 
-				if ( GUILayout.Button ( "Delete Batch" ) )
+				batch.locked = EditorGUILayout.Toggle ( "Locked:", batch.locked );
+				if ( !batch.locked )
 				{
-					myTarget.DeleteBatch ( batchIndex );
-					//Debug.Log ( "Here" );
-				}
-				if ( GUILayout.Button ( "Reset Batch" ) )
-				{
-					myTarget.ResetBatch ( batchIndex );
-					//Debug.Log ( "Here" );
-				}
-
-				if ( batch.Levels.Count < myTarget.MaxLevelsInBatches )
-				{
-					if ( GUILayout.Button ( "Add Level" ) )
+					
+					if ( GUILayout.Button ( "Delete Batch" ) )
 					{
-						batch.AddLevel ();
+						myTarget.DeleteBatch ( batchIndex );
+						//Debug.Log ( "Here" );
+					}
+					if ( GUILayout.Button ( "Reset Batch" ) )
+					{
+						myTarget.ResetBatch ( batchIndex );
+						//Debug.Log ( "Here" );
+					}
+
+					if ( batch.Levels.Count < myTarget.MaxLevelsInBatches )
+					{
+						if ( GUILayout.Button ( "Add Level" ) )
+						{
+							batch.AddLevel ();
+						}
 					}
 				}
-				
 				batchIndex++;
 			}
 			EditorGUILayout.EndHorizontal ();
@@ -79,24 +83,65 @@ public class LevelScriptEditor : Editor
 				
 					int levelIndex = 0;
 
+					GUIStyle rightAlignment = new GUIStyle ();
+					rightAlignment.alignment = TextAnchor.MiddleRight;
+					rightAlignment.fixedWidth = -100.0f;
+					rightAlignment.fixedHeight = 20.0f;
+					rightAlignment.padding = new RectOffset ( 0, 0, 0, 0 );
+					rightAlignment.margin = new RectOffset ( 0, 0, 0, 0 );
+					rightAlignment.stretchWidth = false;
+
+					GUIStyle centerAlignment = new GUIStyle ();
+					centerAlignment.alignment = TextAnchor.MiddleCenter;
+					centerAlignment.fixedWidth = 500.0f;
+					centerAlignment.padding = new RectOffset ( 0, 0, 0, 0 );
+					centerAlignment.margin = new RectOffset ( 0, 0, 0, 0 );
+
+					GUIStyle leftAlignment = new GUIStyle ();
+					leftAlignment.alignment = TextAnchor.MiddleLeft;
+					leftAlignment.fixedWidth = 200.0f;
+					leftAlignment.fixedHeight = 20.0f;
+					leftAlignment.padding = new RectOffset ( 10, 10, 5, 10 );
+					leftAlignment.margin = new RectOffset ( 10, 10, 5, 10 );
+
 					foreach ( Level level in batch.Levels )
 					{
 						
-						Rect levelAndItsOption = EditorGUILayout.BeginHorizontal ();
+						Rect levelAndItsOption = EditorGUILayout.BeginHorizontal ( centerAlignment );
 						{
-							level.show = EditorGUILayout.Foldout ( level.show, "Level:\t" + levelIndex.ToString () );
+							level.show = EditorGUILayout.Foldout ( level.show, "Level: " + levelIndex.ToString () );
 
-							if ( GUILayout.Button ( "Delete Level" ) )
+							if ( !level.locked )
 							{
-								batch.DeleteLevel ( levelIndex );
-								//Debug.Log ( "Here" );
+								Rect levelOptions = EditorGUILayout.BeginHorizontal ();
+								{
+									if ( GUILayout.Button ( "Delete Level" ) )
+									{
+										batch.DeleteLevel ( levelIndex );
+										//Debug.Log ( "Here" );
+									}
+									if ( GUILayout.Button ( "Reset Level" ) )
+									{
+										batch.ResetLevel ( levelIndex );
+										//Debug.Log ( "Here" );
+									}
+								}
+								EditorGUILayout.EndHorizontal ();
+
 							}
-							if ( GUILayout.Button ( "Reset Level" ) )
-							{
-								batch.ResetLevel ( levelIndex );
-								//Debug.Log ( "Here" );
-							}
-							
+//
+//							GUIStyle rightAlignment = new GUIStyle ();
+//							rightAlignment.alignment = TextAnchor.MiddleRight;
+//							rightAlignment.fixedWidth = 100.0f;
+//							rightAlignment.padding = new RectOffset ( 0, 0, 0, 0 );
+//							rightAlignment.margin = new RectOffset ( 0, 0, 0, 0 );
+//
+//							Rect levelLockOption = EditorGUILayout.BeginHorizontal ();
+//							{
+							level.locked = EditorGUILayout.Toggle ( "Locked:", level.locked, rightAlignment );
+//							}
+//							EditorGUILayout.EndHorizontal ();
+
 							levelIndex++;
 						}
 						EditorGUILayout.EndHorizontal ();
@@ -116,11 +161,14 @@ public class LevelScriptEditor : Editor
 										level.ClearAnswered ();
 									
 									}
-
-									if ( GUILayout.Button ( "Clear Answer" ) )
+									if ( !level.locked )
 									{
-										level.ClearWord ();
-										//Debug.Log ( "Here" );
+										
+										if ( GUILayout.Button ( "Clear Answer" ) )
+										{
+											level.ClearWord ();
+											//Debug.Log ( "Here" );
+										}
 									}
 								}
 								EditorGUILayout.EndHorizontal ();
@@ -154,11 +202,14 @@ public class LevelScriptEditor : Editor
 										EditorGUILayout.EndHorizontal ();
 									}
 									EditorGUILayout.EndVertical ();
-
-									if ( GUILayout.Button ( "Clear Options" ) )
+									if ( !level.locked )
 									{
-										level.ClearOptions ();
-										//Debug.Log ( "Here" );
+										
+										if ( GUILayout.Button ( "Clear Options" ) )
+										{
+											level.ClearOptions ();
+											//Debug.Log ( "Here" );
+										}
 									}
 								}
 								EditorGUILayout.EndHorizontal ();
@@ -177,11 +228,14 @@ public class LevelScriptEditor : Editor
 										}
 									}
 									EditorGUILayout.EndHorizontal ();
-
-									if ( GUILayout.Button ( "Clear Selected Pictures" ) )
+									if ( !level.locked )
 									{
-										level.ClearSelectedPictures ();
-										//										Debug.Log ( "Here" );
+										
+										if ( GUILayout.Button ( "Clear Selected Pictures" ) )
+										{
+											level.ClearSelectedPictures ();
+											//										Debug.Log ( "Here" );
+										}
 									}
 								}
 								EditorGUILayout.EndHorizontal ();
@@ -215,11 +269,14 @@ public class LevelScriptEditor : Editor
 										EditorGUILayout.EndHorizontal ();
 									}
 									EditorGUILayout.EndVertical ();
-
-									if ( GUILayout.Button ( "Clear Removed" ) )
+									if ( !level.locked )
 									{
-										level.ClearRemoved ();
+										
+										if ( GUILayout.Button ( "Clear Removed" ) )
+										{
+											level.ClearRemoved ();
 //										Debug.Log ( "Here" );
+										}
 									}
 								}
 								EditorGUILayout.EndHorizontal ();
@@ -245,11 +302,14 @@ public class LevelScriptEditor : Editor
 
 									}
 									EditorGUILayout.EndVertical ();
-
-									if ( GUILayout.Button ( "Clear Answered" ) )
+									if ( !level.locked )
 									{
-										level.ClearAnswered ();
-										//										Debug.Log ( "Here" );
+										
+										if ( GUILayout.Button ( "Clear Answered" ) )
+										{
+											level.ClearAnswered ();
+											//										Debug.Log ( "Here" );
+										}
 									}
 								}
 								EditorGUILayout.EndHorizontal ();
