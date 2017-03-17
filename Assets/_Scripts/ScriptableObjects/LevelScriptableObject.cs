@@ -45,9 +45,14 @@ namespace SO.Levels
 		public void ClearWord ()
 		{
 			Word = "";
-			Word2 = "";
+			ClearSuffix ();
 			ClearAnswered ();
 
+		}
+
+		public void ClearSuffix ()
+		{
+			Word2 = "";
 		}
 
 		public void ClearOptions ()
