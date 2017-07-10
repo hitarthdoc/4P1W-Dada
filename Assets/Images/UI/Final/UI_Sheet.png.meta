@@ -1,0 +1,442 @@
+fileFormatVersion: 2
+guid: ad28ab74a29419b43a6f49df1efe0771
+timeCreated: 1490518990
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: OptionsButton_Pressed
+    21300002: Back_Button
+    21300004: Level_Counter_BG
+    21300006: Coins
+    21300008: 4x_Multiplier
+    21300010: MainMenu_Image
+    21300012: Complete_Glow
+    21300014: Toggle_Off
+    21300016: OptionsButton_Available
+    21300018: Completed_Star
+    21300020: Answer_Button_BG
+    21300022: Common_Button
+    21300024: Notification_Panel
+    21300026: ImageFrame
+    21300028: UI_Sheet_21
+    21300030: UI_Sheet_22
+    21300032: Play_Text
+    21300034: Continue_Text
+    21300036: Add_Letter_PUP
+    21300038: Remove_Letters_PUP
+    21300040: PowerUp_Button
+    21300042: Toggle_On
+    21300044: UI_Sheet_7
+    21300046: Forward_Arrow
+    21300048: Mask
+    21300050: Yes_Text
+    21300052: No_Text
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 1
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 5
+  buildTargetSettings:
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: 59
+    compressionQuality: 50
+    allowsAlphaSplitting: 1
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: OptionsButton_Pressed
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 1914
+        width: 122
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Back_Button
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 1873
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Level_Counter_BG
+      rect:
+        serializedVersion: 2
+        x: 755
+        y: 1840
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Coins
+      rect:
+        serializedVersion: 2
+        x: 968
+        y: 1768
+        width: 220
+        height: 196
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: 4x_Multiplier
+      rect:
+        serializedVersion: 2
+        x: 1318
+        y: 1859
+        width: 160
+        height: 97
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MainMenu_Image
+      rect:
+        serializedVersion: 2
+        x: 1576
+        y: 1603
+        width: 420
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Complete_Glow
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 1313
+        width: 426
+        height: 426
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Toggle_Off
+      rect:
+        serializedVersion: 2
+        x: 625
+        y: 1662
+        width: 112
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: OptionsButton_Available
+      rect:
+        serializedVersion: 2
+        x: 866
+        y: 1600
+        width: 122
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Completed_Star
+      rect:
+        serializedVersion: 2
+        x: 1308
+        y: 1592
+        width: 184
+        height: 184
+      alignment: 9
+      pivot: {x: 0.483, y: 0.47}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Answer_Button_BG
+      rect:
+        serializedVersion: 2
+        x: 986
+        y: 1353
+        width: 138
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Common_Button
+      rect:
+        serializedVersion: 2
+        x: 1212
+        y: 1284
+        width: 772
+        height: 264
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Notification_Panel
+      rect:
+        serializedVersion: 2
+        x: 904
+        y: 968
+        width: 1079
+        height: 227
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ImageFrame
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 445
+        width: 489
+        height: 486
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: UI_Sheet_21
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 705
+        width: 900
+        height: 193
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: UI_Sheet_22
+      rect:
+        serializedVersion: 2
+        x: 887
+        y: 496
+        width: 1081
+        height: 161
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Play_Text
+      rect:
+        serializedVersion: 2
+        x: 1053
+        y: 285
+        width: 252
+        height: 130
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Continue_Text
+      rect:
+        serializedVersion: 2
+        x: 1425
+        y: 308
+        width: 500
+        height: 106
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Add_Letter_PUP
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 128
+        width: 210
+        height: 210
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Remove_Letters_PUP
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 153
+        width: 202
+        height: 202
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PowerUp_Button
+      rect:
+        serializedVersion: 2
+        x: 1008
+        y: 1600
+        width: 122
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Toggle_On
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 1557
+        width: 112
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: UI_Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 903
+        y: 967
+        width: 1081
+        height: 240
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Forward_Arrow
+      rect:
+        serializedVersion: 2
+        x: 606
+        y: 1871
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Mask
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 453
+        width: 471
+        height: 469
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Yes_Text
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 115
+        width: 252
+        height: 130
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: No_Text
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 115
+        width: 252
+        height: 130
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
