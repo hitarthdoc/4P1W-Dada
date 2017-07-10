@@ -1,4 +1,5 @@
 ﻿#define ENABLE_PROFILER
+#define TESTING
 
 using UnityEngine;
 using System.Collections;
@@ -7,19 +8,27 @@ using UnityEngine.UI;
 
 using System;
 
+using System.IO;
+
 //using UnityEngine.Events;
 
 using SO.Levels;
+using SO.Levels.SavingUtility;
 using SO.Progress;
 
 using States.Options;
 using States.Answers;
+
+using Special.Saver;
+
+using Constant;
 
 namespace Managers
 {
 
 	public class Spawner : MonoBehaviour
 	{
+		//		const string Constants.LevelFileName = "/SavedAnswers.SAVE";
 
 		[SerializeField]
 		LevelScriptableObject LSO;
@@ -64,14 +73,66 @@ namespace Managers
 
 		public Transform OptionButtonsHolder;
 
+		public Transform OptionButtonsHolderAtIndex ( int index )
+		{
+			if ( index < OptionButtonsHolder.childCount )
+			{
+				return OptionButtonsHolder.GetChild ( index );
+			}
+			else
+			{
+				new ArgumentOutOfRangeException ( string.Format ( "The index {0} provided is greater than the childCount of OptionButtonHolder {1}", index, OptionButtonsHolder.childCount ), new Exception () );
+				return null;
+			}
+		}
+
+		public GameObject PowerUpHolder;
+
+		public Transform AnswerLettersOnCompletionPanelHolder;
+
+		public Transform AnswerSuffixLettersOnCompletionPanelHolder;
+
 		[SerializeField]
-		private Level CurrentLevel;
+		private Level currentLevel;
+
+		public Level CurrentLevel {
+			get
+			{
+				return currentLevel;
+			}
+		}
 
 		// Use this for initialization
 		void Awake ()
 		{
-			CurrentLevel = PSO.GetCurrentLevelToSpawn ();
+			currentLevel = PSO.GetCurrentLevelToSpawn ();
+			if ( currentLevel != null )
+			{
+				try
+				{
+					PowerUpUseSaver demo = MyXMLSerializer.Deserialize <PowerUpUseSaver> ( Application.persistentDataPath + Constants.LevelFileName );
 
+					if ( currentLevel.Word.Equals ( demo.Word ) )
+					{
+						currentLevel.SetAnswerAndRemovedLetters ( demo );
+					}
+					else
+					{
+						throw new FileNotFoundException ();
+					}
+				}
+				catch
+				{
+					MyXMLSerializer.Serialize <PowerUpUseSaver> ( Application.persistentDataPath + Constants.LevelFileName, currentLevel.GetAnswerAndRemovedLetters () );
+					Debug.Log ( "FirstRun" );
+				}
+			}
+			#if Commented
+			else
+			{
+				UIManReference.ToGameOverPanel ();
+			}
+			#endif
 		}
 
 
@@ -83,20 +144,36 @@ namespace Managers
 
 		void OnEnable ()
 		{
-//			ATManReference.OnLevelComplete += GetAndSpawnNextLevel;
+			AnswerTextManager.OnLevelComplete += ClearAndAddAnswerOnCompletionPanel;
+
+			AnswerTextManager.OnLevelComplete += ClearAndAddAnswerSuffixOnCompletionPanel;
+
+			AnswerTextManager.OnLevelComplete += HideOptionLettersAndPowerUps;
 
 			UIManReference.OnStartGame += SpawnCurrentLevel;
 
 			UIManReference.OnStartNextLevel += GetAndSpawnNextLevel;
+
+			UIManReference.OnStartGame += ShowOptionLettersAndPowerUps;
+
+			UIManReference.OnStartNextLevel += ShowOptionLettersAndPowerUps;
 		}
 
 		void OnDisable ()
 		{
-//			ATManReference.OnLevelComplete -= GetAndSpawnNextLevel;
+			AnswerTextManager.OnLevelComplete -= ClearAndAddAnswerOnCompletionPanel;
+
+			AnswerTextManager.OnLevelComplete -= ClearAndAddAnswerSuffixOnCompletionPanel;
+
+			AnswerTextManager.OnLevelComplete -= HideOptionLettersAndPowerUps;
 
 			UIManReference.OnStartGame -= SpawnCurrentLevel;
 
 			UIManReference.OnStartNextLevel -= GetAndSpawnNextLevel;
+
+			UIManReference.OnStartGame -= ShowOptionLettersAndPowerUps;
+
+			UIManReference.OnStartNextLevel -= ShowOptionLettersAndPowerUps;
 		}
 
 		private void SpawnCurrentLevel ()
@@ -107,13 +184,13 @@ namespace Managers
 			 * 		SEND currentLevel. Word to someOne for tracking.
 			*/
 
-			if ( CurrentLevel != null )
+			if ( currentLevel != null )
 			{
-				ATManReference.AnswerWord = CurrentLevel.Word;
+				ATManReference.AnswerWord = currentLevel.Word;
 
 				int imageIndex = 0;
 
-				foreach ( Sprite image in CurrentLevel.Pics )
+				foreach ( Sprite image in currentLevel.Pics )
 				{
 					GameObject newImageReference = Instantiate ( ImagePrefab, ImagesHolder ) as GameObject;
 					newImageReference.GetComponent <Image> ().sprite = image;
@@ -123,60 +200,67 @@ namespace Managers
 					AttachListener ( newImageReference.GetComponent <Button> (), 1, Convert.ToChar ( imageIndex++ ) );
 				}
 
-				foreach ( char optionLetter in CurrentLevel.OtherChars )
+				for ( int index = 0, CurrentLevelOtherCharsCount = currentLevel.OtherChars.Count; index < CurrentLevelOtherCharsCount; index++ )
 				{
+					char optionLetter = currentLevel.OtherChars [ index ];
 					GameObject newOptionButtonReference = Instantiate ( OptionLetterButtonPrefab, OptionButtonsHolder ) as GameObject;
-
-					newOptionButtonReference.GetComponent <RectTransform> ().localScale = Vector3.one;
-
-					OptionButtonStateManager tempRef = newOptionButtonReference.GetComponent <OptionButtonStateManager> ();
-
-					tempRef.AssignLetter ( optionLetter );
+					newOptionButtonReference.GetComponent<RectTransform> ().localScale = Vector3.one;
+					OptionButtonStateManager tempRef = newOptionButtonReference.GetComponent<OptionButtonStateManager> ();
 					tempRef.AssignReferences ( IPManReference, ATManReference );
 
+					if ( !currentLevel.RemovedLetters [ index ] )
+					{
+						tempRef.AssignLetter ( optionLetter );
+					}
+					else
+					{
+						tempRef.SetStateDisabled ();
+					}
 					//	Removed both as Now it is done by OBSM.
 					//	newOptionButtonReference.GetComponentInChildren <Text> ().text = optionLetter.ToString ();
 					//	AttachListener ( newOptionButtonReference.GetComponent <Button> (), 1, optionLetter );
-
 				}
 
 				Profiler.BeginSample ( "Spawnig Answers", this );
 				{
-					foreach ( char answerLetter in CurrentLevel.Word )
+					for ( int index = 0, CurrentLevelWordCount = currentLevel.Word.Length; index < CurrentLevelWordCount; index++ )
 					{
+						char answerLetter = currentLevel.Word [ index ];
 						GameObject newAnswerButtonReference = Instantiate ( AnswerLetterButtonPrefab, AnswerButtonsHolder ) as GameObject;
-
-						newAnswerButtonReference.GetComponent <RectTransform> ().localScale = Vector3.one;
-
-						AnswerButtonStateManager tempRef = newAnswerButtonReference.GetComponent <AnswerButtonStateManager> ();
-
+						newAnswerButtonReference.GetComponent<RectTransform> ().localScale = Vector3.one;
+						AnswerButtonStateManager tempRef = newAnswerButtonReference.GetComponent<AnswerButtonStateManager> ();
 						tempRef.AssignReferences ( IPManReference, ATManReference );
+
+						if ( currentLevel.AnsweredLetters [ index ] )
+						{
+							tempRef.SetStateAnswered ( answerLetter );
+						}
 
 						//	Removed both as Now it is done by OBSM.
 						//	newOptionButtonReference.GetComponentInChildren <Text> ().text = optionLetter.ToString ();
 						//	AttachListener ( newOptionButtonReference.GetComponent <Button> (), 1, optionLetter );
-
 					}
 //					Debug.Break ();
 				}
 				Profiler.EndSample ();
 
+				#region ChangeGridLayoutGroupProperties for AnswerButtonsHolder
 				GridLayoutGroup tempRefForGLG = AnswerButtonsHolder.GetComponent <GridLayoutGroup> ();
 
-				if ( CurrentLevel.Word.Length <= 7 )
+				if ( currentLevel.Word.Length <= 7 )
 				{
 					ChangeGridLayoutGroupProperties ( Layout_7AndLess, ref tempRefForGLG );
 //					tempRefForAnswerButtonsHolder = Layout_7AndLess.GetComponent <GridLayoutGroup> ();
 				}
 				else
-				if ( CurrentLevel.Word.Length <= 10 )
+				if ( currentLevel.Word.Length <= 10 )
 				{
 					ChangeGridLayoutGroupProperties ( Layout_8To10, ref tempRefForGLG );
 //					tempRefForAnswerButtonsHolder = Layout_8To10.GetComponent <GridLayoutGroup> ();
 
 				}
 				else
-				if ( CurrentLevel.Word.Length <= 12 )
+				if ( currentLevel.Word.Length <= 12 )
 				{
 					ChangeGridLayoutGroupProperties ( Layout_11And12, ref tempRefForGLG );
 //					tempRefForAnswerButtonsHolder = Layout_11And12.GetComponent <GridLayoutGroup> ();
@@ -188,10 +272,11 @@ namespace Managers
 //					tempRefForAnswerButtonsHolder = Layout_11And12.GetComponent <GridLayoutGroup> ();
 					Debug.Log ( "WE have a VERYYYY BIIIIGGGG WORD." );
 				}
+				#endregion
 
-				if ( CurrentLevel.Word2.Length > 0 )
+				if ( currentLevel.Word2.Length > 0 )
 				{
-					foreach ( char suffixLetter in CurrentLevel.Word2 )
+					foreach ( char suffixLetter in currentLevel.Word2 )
 					{
 						GameObject newAnswerSuffixReference = Instantiate ( AnswerSuffixPrefab, AnswerSuffixHolder ) as GameObject;
 
@@ -206,22 +291,23 @@ namespace Managers
 					}
 				}
 
+				#region ChangeGridLayoutGroupProperties for AnswerSuffixHolder
 				tempRefForGLG = AnswerSuffixHolder.GetComponent <GridLayoutGroup> ();
 
-				if ( CurrentLevel.Word.Length <= 7 )
+				if ( currentLevel.Word.Length <= 7 )
 				{
 					ChangeGridLayoutGroupProperties ( Layout_7AndLess, ref tempRefForGLG );
 //					tempRefForAnswerButtonsHolder = Layout_7AndLess.GetComponent <GridLayoutGroup> ();
 				}
 				else
-				if ( CurrentLevel.Word.Length <= 10 )
+				if ( currentLevel.Word.Length <= 10 )
 				{
 					ChangeGridLayoutGroupProperties ( Layout_8To10, ref tempRefForGLG );
 //						tempRefForAnswerButtonsHolder = Layout_8To10.GetComponent <GridLayoutGroup> ();
 
 				}
 				else
-				if ( CurrentLevel.Word.Length <= 12 )
+				if ( currentLevel.Word.Length <= 12 )
 				{
 					ChangeGridLayoutGroupProperties ( Layout_11And12, ref tempRefForGLG );
 //							tempRefForAnswerButtonsHolder = Layout_11And12.GetComponent <GridLayoutGroup> ();
@@ -233,8 +319,16 @@ namespace Managers
 //							tempRefForAnswerButtonsHolder = Layout_11And12.GetComponent <GridLayoutGroup> ();
 					Debug.Log ( "WE have a VERYYYY BIIIIGGGG WORD." );
 				}
-				
+				#endregion
+
 				StartCoroutine ( "ATMAddNewAnswerButtonsCaller" );
+			}
+			else
+			{
+				#if TESTING && true
+				Debug.Log ( "Ever Here" );
+				#endif
+				UIManReference.ToGameOverPanel ();
 			}
 
 		}
@@ -244,11 +338,28 @@ namespace Managers
 			yield return new WaitForEndOfFrame ();
 			
 			ATManReference.AddNewAnswerButtonsReference ( AnswerButtonsHolder );
+			ATManReference.UpdateAnsweredLetters ( currentLevel );
+		}
+
+		public void GetNextLevelBackend ()
+		{
+			currentLevel = PSO.GetNextLevelToSpawn ();
+
+			MyXMLSerializer.Serialize <PowerUpUseSaver> ( Application.persistentDataPath + Constants.LevelFileName, currentLevel.GetAnswerAndRemovedLetters () );
 		}
 
 		private void GetAndSpawnNextLevel ()
 		{
-			CurrentLevel = PSO.GetNextLevelToSpawn ();
+			currentLevel = PSO.GetNextLevelToSpawn ();
+
+			#if TESTING
+			Debug.Log ( Application.persistentDataPath );
+			#endif
+
+			if ( currentLevel != null )
+			{
+				MyXMLSerializer.Serialize <PowerUpUseSaver> ( Application.persistentDataPath + Constants.LevelFileName, currentLevel.GetAnswerAndRemovedLetters () );
+			}
 
 			SpawnCurrentLevel ();
 		}
@@ -342,9 +453,87 @@ namespace Managers
 
 		}
 
-		public Sprite GetImageatindex ( int index )
+		private void ClearAndAddAnswerOnCompletionPanel ()
 		{
-			return CurrentLevel.Pics [ index ];
+			int childrenCount = AnswerLettersOnCompletionPanelHolder.childCount;
+
+			for ( int index = 0; index < childrenCount; index++ )
+			{
+				DestroyImmediate ( AnswerLettersOnCompletionPanelHolder.GetChild ( 0 ).gameObject );
+			}
+
+			childrenCount = AnswerButtonsHolder.childCount;
+
+			for ( int index = 0; index < childrenCount; index++ )
+			{
+				AnswerButtonsHolder.GetChild ( 0 ).GetComponentInChildren <AnswerButtonStateManager> ().AddingToCompletePanel ();
+				AnswerButtonsHolder.GetChild ( 0 ).SetParent ( AnswerLettersOnCompletionPanelHolder );
+			}
+			GridLayoutGroup tempRef = AnswerLettersOnCompletionPanelHolder.GetComponent <GridLayoutGroup> ();
+			ChangeGridLayoutGroupProperties ( AnswerButtonsHolder.GetComponent <GridLayoutGroup> (), ref tempRef );
+
+		}
+
+		private void HideOptionLettersAndPowerUps ()
+		{
+			OptionButtonsHolder.gameObject.SetActive ( false );
+			PowerUpHolder.gameObject.SetActive ( false );
+		}
+
+
+		private void ShowOptionLettersAndPowerUps ()
+		{
+			OptionButtonsHolder.gameObject.SetActive ( true );
+			PowerUpHolder.gameObject.SetActive ( true );
+		}
+
+		private void ClearAndAddAnswerSuffixOnCompletionPanel ()
+		{
+			int childrenCount = AnswerSuffixLettersOnCompletionPanelHolder.childCount;
+
+			for ( int index = 0; index < childrenCount; index++ )
+			{
+				DestroyImmediate ( AnswerSuffixLettersOnCompletionPanelHolder.GetChild ( 0 ).gameObject );
+			}
+
+			childrenCount = AnswerSuffixHolder.childCount;
+
+			for ( int index = 0; index < childrenCount; index++ )
+			{
+				AnswerSuffixHolder.GetChild ( 0 ).SetParent ( AnswerSuffixLettersOnCompletionPanelHolder );
+			}
+			GridLayoutGroup tempRef = AnswerSuffixLettersOnCompletionPanelHolder.GetComponent <GridLayoutGroup> ();
+			ChangeGridLayoutGroupProperties ( AnswerSuffixHolder.GetComponent <GridLayoutGroup> (), ref tempRef );
+
+		}
+
+		public void UpdateLevel ()
+		{
+			MyXMLSerializer.Serialize <PowerUpUseSaver> ( Application.persistentDataPath + Constants.LevelFileName, currentLevel.GetAnswerAndRemovedLetters () );
+
+			for ( int index = 0; index < currentLevel.AnsweredLetters.Count; index++ )
+			{
+				if ( currentLevel.AnsweredLetters [ index ] )
+				{
+					AnswerButtonsHolder.GetChild ( index ).GetComponent <AnswerButtonStateManager> ().SetStateAnswered ( currentLevel.Word [ index ] );
+				}
+			}
+
+			for ( int index = 0; index < currentLevel.RemovedLetters.Count; index++ )
+			{
+				if ( currentLevel.RemovedLetters [ index ] )
+				{
+					OptionButtonsHolder.GetChild ( index ).GetComponent <OptionButtonStateManager> ().SetStateDisabled ();
+				}
+			}
+
+			ATManReference.UpdateAnsweredLetters ( currentLevel );
+
+		}
+
+		public Sprite GetImageAtIndex ( int index )
+		{
+			return currentLevel.Pics [ index ];
 		}
 
 		void ChangeGridLayoutGroupProperties ( GridLayoutGroup fromGLG, ref GridLayoutGroup toGLG )

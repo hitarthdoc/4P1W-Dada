@@ -6,12 +6,39 @@ using System.Collections.Generic;
 namespace SO.Levels
 {
 
+	namespace SavingUtility
+	{
+		[System.Serializable]
+		public class PowerUpUseSaver
+		{
+			public string Word;
+
+			public List <bool> AnsweredLetters = new List<bool> ();
+
+			public List <bool> RemovedLetters = new List<bool> ( 12 );
+
+			public PowerUpUseSaver ()
+			{
+			}
+
+			public PowerUpUseSaver ( string word, List <bool> answeredLetters, List <bool> removedLetters )
+			{
+				Word = word;
+				AnsweredLetters = answeredLetters;
+				RemovedLetters = removedLetters;
+			}
+		}
+	}
+
 	[System.Serializable]
 	public class Level
 	{
+		
+		#if UNITY_EDITOR
 		public bool show = false;
 
 		public bool locked = false;
+		#endif
 
 		[SerializeField]
 		private bool completionStatus = false;
@@ -100,10 +127,23 @@ namespace SO.Levels
 
 		}
 
+		public SavingUtility.PowerUpUseSaver GetAnswerAndRemovedLetters ()
+		{
+			return new SavingUtility.PowerUpUseSaver ( Word, AnsweredLetters, RemovedLetters );
+		}
+
+		public void SetAnswerAndRemovedLetters ( SavingUtility.PowerUpUseSaver ansAndRemLetters)
+		{
+			Word = ansAndRemLetters.Word;
+			AnsweredLetters = ansAndRemLetters.AnsweredLetters;
+			RemovedLetters = ansAndRemLetters.RemovedLetters;
+		}
+
 		public Level ()
 		{
-			
+			#if UNITY_EDITOR
 			show = false;
+			#endif
 			completionStatus = false;
 			this.ClearWord ();
 			this.ClearOptions ();
@@ -117,9 +157,11 @@ namespace SO.Levels
 	[System.Serializable]
 	public class LevelBatch
 	{
+		#if UNITY_EDITOR
 		public bool show = false;
 
 		public bool locked = false;
+		#endif
 
 		public List <Level> Levels = new List<Level> ( 10 );
 
@@ -130,7 +172,9 @@ namespace SO.Levels
 
 		public LevelBatch ()
 		{
+			#if UNITY_EDITOR
 			show = false;
+			#endif
 
 			AddLevel ();
 		}
@@ -156,6 +200,16 @@ namespace SO.Levels
 		public int MaxBatches = 10;
 
 		public int MaxLevelsInBatches = 10;
+
+		public int CurrentLevelCount ()
+		{
+			int totalLevels = 0;
+			foreach ( LevelBatch LB in LevelBatches )
+			{
+				totalLevels += LB.Levels.Count;
+			}
+			return totalLevels;
+		}
 
 		public void AddBatch ()
 		{

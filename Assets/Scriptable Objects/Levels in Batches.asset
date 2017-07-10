@@ -13,49 +13,205 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelBatches:
   - show: 1
-    locked: 0
+    locked: 1
     Levels:
     - show: 0
-      locked: 0
+      locked: 1
       completionStatus: 0
       Pics:
-      - {fileID: 21300000, guid: db39aeb895dff2e43a82015362343483, type: 3}
-      - {fileID: 21300000, guid: 8979e0585c13f1d4bbd101c48fd0ddf7, type: 3}
-      - {fileID: 21300000, guid: 32debc483d4ad2544a495861a90754d8, type: 3}
-      - {fileID: 21300000, guid: 62fb8b8c456ed0f40a016a3875e295f6, type: 3}
-      Word: train
-      Word2: ing
+      - {fileID: 21300000, guid: fae92c6a0766cc64f83cacfd1b7fd0f4, type: 3}
+      - {fileID: 21300002, guid: fae92c6a0766cc64f83cacfd1b7fd0f4, type: 3}
+      - {fileID: 21300004, guid: fae92c6a0766cc64f83cacfd1b7fd0f4, type: 3}
+      - {fileID: 21300006, guid: fae92c6a0766cc64f83cacfd1b7fd0f4, type: 3}
+      Word: prasad
+      Word2: 
+      AnsweredLetters: 000000000000
+      RemovedLetters: 000000000000000000000000
+      OtherChars: 770073007000650061007400720064006100650073006d00
+    - show: 0
+      locked: 1
+      completionStatus: 0
+      Pics:
+      - {fileID: 21300000, guid: 3f51d4459bc61684e8bba489a26b1531, type: 3}
+      - {fileID: 21300002, guid: 3f51d4459bc61684e8bba489a26b1531, type: 3}
+      - {fileID: 21300004, guid: 3f51d4459bc61684e8bba489a26b1531, type: 3}
+      - {fileID: 21300006, guid: 3f51d4459bc61684e8bba489a26b1531, type: 3}
+      Word: light
+      Word2: 
       AnsweredLetters: 0000000000
       RemovedLetters: 000000000000000000000000
-      OtherChars: 74007200610069006e006100620063007300650064007900
+      OtherChars: 730070006c006100670074006e007200690068006b006100
     - show: 0
-      locked: 0
+      locked: 1
       completionStatus: 0
       Pics:
-      - {fileID: 21300000, guid: 62fb8b8c456ed0f40a016a3875e295f6, type: 3}
-      - {fileID: 21300000, guid: db39aeb895dff2e43a82015362343483, type: 3}
-      - {fileID: 21300000, guid: 8979e0585c13f1d4bbd101c48fd0ddf7, type: 3}
-      - {fileID: 21300000, guid: 62fb8b8c456ed0f40a016a3875e295f6, type: 3}
-      Word: pratikraman
-      Word2: 
-      AnsweredLetters: 0000000000000000000000
+      - {fileID: 21300000, guid: 362b827d653d16846a12700a3184cc0b, type: 3}
+      - {fileID: 21300002, guid: 362b827d653d16846a12700a3184cc0b, type: 3}
+      - {fileID: 21300004, guid: 362b827d653d16846a12700a3184cc0b, type: 3}
+      - {fileID: 21300006, guid: 362b827d653d16846a12700a3184cc0b, type: 3}
+      Word: krishna
+      Word2: bhagwan
+      AnsweredLetters: 00000000000000
       RemovedLetters: 000000000000000000000000
-      OtherChars: 700072006100740069006b00720061006d006e0061006900
+      OtherChars: 760061006b0072007300750069006800640065006e007600
+    - show: 0
+      locked: 1
+      completionStatus: 0
+      Pics:
+      - {fileID: 21300000, guid: ebec19a5f98506e42a512bf379f52d53, type: 3}
+      - {fileID: 21300002, guid: ebec19a5f98506e42a512bf379f52d53, type: 3}
+      - {fileID: 21300004, guid: ebec19a5f98506e42a512bf379f52d53, type: 3}
+      - {fileID: 21300006, guid: ebec19a5f98506e42a512bf379f52d53, type: 3}
+      Word: diwali
+      Word2: 
+      AnsweredLetters: 000000000000
+      RemovedLetters: 000000000000000000000000
+      OtherChars: 6700690077006c0074006400690061006800740066007200
+    - show: 0
+      locked: 1
+      completionStatus: 0
+      Pics:
+      - {fileID: 21300000, guid: a5101b1313a02cf458550f7ecfa1e50f, type: 3}
+      - {fileID: 21300002, guid: a5101b1313a02cf458550f7ecfa1e50f, type: 3}
+      - {fileID: 21300004, guid: a5101b1313a02cf458550f7ecfa1e50f, type: 3}
+      - {fileID: 21300006, guid: a5101b1313a02cf458550f7ecfa1e50f, type: 3}
+      Word: dussehra
+      Word2: 
+      AnsweredLetters: 0000000000000000
+      RemovedLetters: 000000000000000000000000
+      OtherChars: 730061006e0074007700640075006f006500680072007300
+    - show: 0
+      locked: 1
+      completionStatus: 0
+      Pics:
+      - {fileID: 21300000, guid: 14622c1904f8ebc4993c592d012d48f1, type: 3}
+      - {fileID: 21300002, guid: 14622c1904f8ebc4993c592d012d48f1, type: 3}
+      - {fileID: 21300004, guid: 14622c1904f8ebc4993c592d012d48f1, type: 3}
+      - {fileID: 21300006, guid: 14622c1904f8ebc4993c592d012d48f1, type: 3}
+      Word: eid
+      Word2: 
+      AnsweredLetters: 000000
+      RemovedLetters: 000000000000000000000000
+      OtherChars: 79006d00650064006c0075006d0069006100680073006b00
+    - show: 0
+      locked: 1
+      completionStatus: 0
+      Pics:
+      - {fileID: 21300000, guid: 2578a54286727c24482a93d42d595f61, type: 3}
+      - {fileID: 21300002, guid: 2578a54286727c24482a93d42d595f61, type: 3}
+      - {fileID: 21300004, guid: 2578a54286727c24482a93d42d595f61, type: 3}
+      - {fileID: 21300006, guid: 2578a54286727c24482a93d42d595f61, type: 3}
+      Word: ek
+      Word2: indriya
+      AnsweredLetters: 0000
+      RemovedLetters: 000000000000000000000000
+      OtherChars: 680069006e006b006f006200740063006100700065007200
+    - show: 0
+      locked: 1
+      completionStatus: 0
+      Pics:
+      - {fileID: 21300000, guid: 687af8fcd3c0977498bd6792b855fabc, type: 3}
+      - {fileID: 21300002, guid: 687af8fcd3c0977498bd6792b855fabc, type: 3}
+      - {fileID: 21300004, guid: 687af8fcd3c0977498bd6792b855fabc, type: 3}
+      - {fileID: 21300006, guid: 687af8fcd3c0977498bd6792b855fabc, type: 3}
+      Word: ganpati
+      Word2: bhagwan
+      AnsweredLetters: 00000000000000
+      RemovedLetters: 000000000000000000000000
+      OtherChars: 6500670073006e0068007400790069006100700061006500
+    - show: 0
+      locked: 1
+      completionStatus: 0
+      Pics:
+      - {fileID: 21300000, guid: 25d287ae398f04d40b4aa45f53a6470d, type: 3}
+      - {fileID: 21300002, guid: 25d287ae398f04d40b4aa45f53a6470d, type: 3}
+      - {fileID: 21300004, guid: 25d287ae398f04d40b4aa45f53a6470d, type: 3}
+      - {fileID: 21300006, guid: 25d287ae398f04d40b4aa45f53a6470d, type: 3}
+      Word: jatra
+      Word2: 
+      AnsweredLetters: 0000000000
+      RemovedLetters: 000000000000000000000000
+      OtherChars: 6100700074006900630061006e006a006900720063007300
   - show: 0
     locked: 1
     Levels:
     - show: 0
-      locked: 0
+      locked: 1
       completionStatus: 0
       Pics:
-      - {fileID: 0}
-      - {fileID: 0}
-      - {fileID: 0}
-      - {fileID: 0}
-      Word: 
-      Word2: 
-      AnsweredLetters: 
+      - {fileID: 21300000, guid: 2f8e46cf80753794c9336458c229dcdb, type: 3}
+      - {fileID: 21300002, guid: 2f8e46cf80753794c9336458c229dcdb, type: 3}
+      - {fileID: 21300004, guid: 2f8e46cf80753794c9336458c229dcdb, type: 3}
+      - {fileID: 21300006, guid: 2f8e46cf80753794c9336458c229dcdb, type: 3}
+      Word: hanuman
+      Word2: bhagwan
+      AnsweredLetters: 00000000000000
       RemovedLetters: 000000000000000000000000
-      OtherChars: 000000000000000000000000000000000000000000000000
+      OtherChars: 73006800690061006e006e006d0061007500720075007400
+    - show: 0
+      locked: 1
+      completionStatus: 0
+      Pics:
+      - {fileID: 21300000, guid: 9991ff9b4cad69d43b86f2242952ba29, type: 3}
+      - {fileID: 21300002, guid: 9991ff9b4cad69d43b86f2242952ba29, type: 3}
+      - {fileID: 21300004, guid: 9991ff9b4cad69d43b86f2242952ba29, type: 3}
+      - {fileID: 21300006, guid: 9991ff9b4cad69d43b86f2242952ba29, type: 3}
+      Word: samadhi
+      Word2: 
+      AnsweredLetters: 00000000000000
+      RemovedLetters: 000000000000000000000000
+      OtherChars: 6d006e0068006400680072006b0061006200730069006100
+    - show: 0
+      locked: 1
+      completionStatus: 0
+      Pics:
+      - {fileID: 21300000, guid: 69b966adb8d523f41a123208cbe395f9, type: 3}
+      - {fileID: 21300002, guid: 69b966adb8d523f41a123208cbe395f9, type: 3}
+      - {fileID: 21300004, guid: 69b966adb8d523f41a123208cbe395f9, type: 3}
+      - {fileID: 21300006, guid: 69b966adb8d523f41a123208cbe395f9, type: 3}
+      Word: satsang
+      Word2: 
+      AnsweredLetters: 00000000000000
+      RemovedLetters: 000000000000000000000000
+      OtherChars: 6f006100610073006f00730061006e006700740064007300
+    - show: 0
+      locked: 1
+      completionStatus: 0
+      Pics:
+      - {fileID: 21300000, guid: 82dcc8e7be200394abe63ea1d1fccd59, type: 3}
+      - {fileID: 21300002, guid: 82dcc8e7be200394abe63ea1d1fccd59, type: 3}
+      - {fileID: 21300004, guid: 82dcc8e7be200394abe63ea1d1fccd59, type: 3}
+      - {fileID: 21300006, guid: 82dcc8e7be200394abe63ea1d1fccd59, type: 3}
+      Word: simandhar
+      Word2: swami
+      AnsweredLetters: 000000000000000000
+      RemovedLetters: 000000000000000000000000
+      OtherChars: 6400730068007200740061006b00610069006d006e007300
+    - show: 0
+      locked: 1
+      completionStatus: 0
+      Pics:
+      - {fileID: 21300000, guid: a98b21ee892bb83498bd107c4c482a1a, type: 3}
+      - {fileID: 0}
+      - {fileID: 21300004, guid: a98b21ee892bb83498bd107c4c482a1a, type: 3}
+      - {fileID: 21300006, guid: a98b21ee892bb83498bd107c4c482a1a, type: 3}
+      Word: tirthankar
+      Word2: bhagwan
+      AnsweredLetters: 00000000000000000000
+      RemovedLetters: 000000000000000000000000
+      OtherChars: 6800690061006100720074007400740068006b0072006e00
+    - show: 0
+      locked: 1
+      completionStatus: 0
+      Pics:
+      - {fileID: 21300006, guid: 427adb78da7b6994cba1de3ff59227ba, type: 3}
+      - {fileID: 21300004, guid: 427adb78da7b6994cba1de3ff59227ba, type: 3}
+      - {fileID: 21300002, guid: 427adb78da7b6994cba1de3ff59227ba, type: 3}
+      - {fileID: 21300000, guid: 427adb78da7b6994cba1de3ff59227ba, type: 3}
+      Word: tri
+      Word2: mandiWr
+      AnsweredLetters: 000000
+      RemovedLetters: 000000000000000000000000
+      OtherChars: 7400680072006500650068006e0074007a006a0069007200
   MaxBatches: 10
   MaxLevelsInBatches: 10

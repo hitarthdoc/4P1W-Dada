@@ -2,7 +2,11 @@
 using System.Collections;
 using UnityEditor;
 
+using System.Collections.Generic;
+
 using SO.Levels;
+
+using Special.Saver;
 
 [CustomEditor ( typeof ( LevelScriptableObject ) )]
 public class LevelScriptEditor : Editor
@@ -14,20 +18,52 @@ public class LevelScriptEditor : Editor
 
 		Rect LSODetsAndMaxes = EditorGUILayout.BeginVertical ();
 		{
-			int totalLevels = 0;
-			foreach ( LevelBatch LB in myTarget.LevelBatches )
-			{
-				totalLevels += LB.Levels.Count;
-			}
-
+			
 			EditorGUILayout.LabelField ( "Batch Count:\t", myTarget.LevelBatches.Capacity.ToString () );
 			EditorGUILayout.LabelField ( "Max Batches:\t", myTarget.MaxBatches.ToString () );
 			EditorGUILayout.LabelField ( "Max Levels in Batches:\t", myTarget.MaxLevelsInBatches.ToString () );
 			EditorGUILayout.LabelField ( "Max Levels Total:\t", ( myTarget.MaxLevelsInBatches * myTarget.MaxBatches ).ToString () );
-			EditorGUILayout.LabelField ( "Current Levels Total:\t", totalLevels.ToString () );
+			EditorGUILayout.LabelField ( "Current Levels Total:\t", myTarget.CurrentLevelCount ().ToString () );
 //		EditorGUILayout.LabelField ( "Level", myTarget.LevelBatches.ToString () );
 		}
 		EditorGUILayout.EndVertical ();
+
+		Rect SpecialFunctions = EditorGUILayout.BeginHorizontal ();
+		{
+			if ( myTarget != null && false )
+			{
+				if ( GUILayout.Button ( "Save Level Object" ) )
+				{
+					MyXMLSerializer.Serialize <List <LevelBatch>> ( Application.persistentDataPath + "/Save.SAVE", myTarget.LevelBatches );
+					Debug.Log ( Application.persistentDataPath );
+				}
+
+				if ( GUILayout.Button ( "Restore Level Object" ) )
+				{
+					myTarget.LevelBatches = MyXMLSerializer.Deserialize <List <LevelBatch>> ( Application.persistentDataPath + "/Save.SAVE" );
+					Debug.Log ( myTarget );
+				}
+			}
+
+			if ( GUILayout.Button ( "Delete Saved Game" ) && ( System.IO.File.Exists ( Application.persistentDataPath + Constant.Constants.LevelFileName ) ) )
+			{
+				System.IO.File.Delete ( Application.persistentDataPath + Constant.Constants.LevelFileName );
+			}
+
+			if ( GUILayout.Button ( "Reset Answered and Removed Letters" ) )
+			{
+				foreach ( LevelBatch batchItem in myTarget.LevelBatches )
+				{
+					foreach ( Level levelItem in batchItem.Levels )
+					{
+						levelItem.ClearRemoved ();
+						levelItem.ClearAnswered ();
+					}
+				}
+			}
+
+		}
+		EditorGUILayout.EndHorizontal ();
 
 		if ( myTarget.LevelBatches.Count < myTarget.MaxBatches )
 		{

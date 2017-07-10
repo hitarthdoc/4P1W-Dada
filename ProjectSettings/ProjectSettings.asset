@@ -10,8 +10,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: GNC
-  productName: Dada's 4P1W
+  companyName: Gyani Ni Chhayama
+  productName: PicAchar - Beta
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenStyle: 0
@@ -96,16 +96,16 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleIdentifier: com.GNC.4P1W
-  bundleVersion: 1.0
+  bundleIdentifier: com.GNC.PicAchar
+  bundleVersion: Beta.02
   preloadedAssets: []
   metroEnableIndependentInputSource: 0
   xboxOneDisableKinectGpuReservation: 0
   singlePassStereoRendering: 0
   protectGraphicsMemory: 0
-  AndroidBundleVersionCode: 1
+  AndroidBundleVersionCode: 3
   AndroidMinSdkVersion: 9
-  AndroidPreferredInstallLocation: 1
+  AndroidPreferredInstallLocation: 0
   aotOptions: 
   apiCompatibilityLevel: 2
   stripEngineCode: 1
@@ -116,11 +116,11 @@ PlayerSettings:
   ForceSDCardPermission: 0
   CreateWallpaper: 0
   APKExpansionFiles: 0
-  preloadShaders: 0
-  StripUnusedMeshComponents: 0
+  preloadShaders: 1
+  StripUnusedMeshComponents: 1
   VertexChannelCompressionMask:
     serializedVersion: 2
-    m_Bits: 238
+    m_Bits: 0
   iPhoneSdkVersion: 988
   iPhoneTargetOSVersion: 24
   tvOSSdkVersion: 0
@@ -167,14 +167,17 @@ PlayerSettings:
   iOSDeviceRequirements: []
   iOSURLSchemes: []
   appleDeveloperTeamID: 
+  iOSManualSigningProvisioningProfileID: 
+  tvOSManualSigningProvisioningProfileID: 
+  appleEnableAutomaticSigning: 0
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: 
-  AndroidKeyaliasName: 
+  AndroidKeystoreName: D:/Hitarth/GNC.keystore
+  AndroidKeyaliasName: gnc
   AndroidTVCompatibility: 0
   AndroidIsGame: 1
-  androidEnableBanner: 1
+  androidEnableBanner: 0
   m_AndroidBanners:
   - width: 320
     height: 180
@@ -185,10 +188,13 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 0}
+      m_Icon: {fileID: 2800000, guid: fb4b7f1b8130cef4eaf3b6db0f8fc0c1, type: 3}
       m_Width: 128
       m_Height: 128
-  m_BuildTargetBatching: []
+  m_BuildTargetBatching:
+  - m_BuildTarget: Android
+    m_StaticBatching: 1
+    m_DynamicBatching: 1
   m_BuildTargetGraphicsAPIs: []
   webPlayerTemplate: APPLICATION:Default
   m_TemplateCustomTags: {}
@@ -304,6 +310,9 @@ PlayerSettings:
   ps4attribShareSupport: 0
   ps4attribExclusiveVR: 0
   ps4disableAutoHideSplash: 0
+  ps4videoRecordingFeaturesUsed: 0
+  ps4contentSearchFeaturesUsed: 0
+  ps4attribEyeToEyeDistanceSettingVR: 0
   ps4IncludedModules: []
   monoEnv: 
   psp2Splashimage: {fileID: 0}
@@ -427,15 +436,27 @@ PlayerSettings:
   - Android::ScriptingBackend
   - Metro::ScriptingBackend
   - Standalone::ScriptingBackend
+  - WebGL::ScriptingBackend
+  - WebGL::audioCompressionFormat
+  - WebGL::exceptionSupport
+  - WebGL::memorySize
   - WebPlayer::ScriptingBackend
   - iOS::Architecture
   - iOS::ScriptingBackend
+  - tvOS::Architecture
+  - tvOS::ScriptingBackend
   Android::ScriptingBackend: 0
   Metro::ScriptingBackend: 2
   Standalone::ScriptingBackend: 0
+  WebGL::ScriptingBackend: 1
+  WebGL::audioCompressionFormat: 4
+  WebGL::exceptionSupport: 1
+  WebGL::memorySize: 256
   WebPlayer::ScriptingBackend: 0
   iOS::Architecture: 2
   iOS::ScriptingBackend: 1
+  tvOS::Architecture: 1
+  tvOS::ScriptingBackend: 1
   boolPropertyNames:
   - Android::VR::enable
   - Metro::VR::enable
@@ -448,6 +469,9 @@ PlayerSettings:
   - Standalone::VR::enable
   - Tizen::VR::enable
   - WebGL::VR::enable
+  - WebGL::analyzeBuildSize
+  - WebGL::dataCaching
+  - WebGL::useEmbeddedResources
   - WebPlayer::VR::enable
   - WiiU::VR::enable
   - Xbox360::VR::enable
@@ -466,6 +490,9 @@ PlayerSettings:
   Standalone::VR::enable: 0
   Tizen::VR::enable: 0
   WebGL::VR::enable: 0
+  WebGL::analyzeBuildSize: 0
+  WebGL::dataCaching: 0
+  WebGL::useEmbeddedResources: 0
   WebPlayer::VR::enable: 0
   WiiU::VR::enable: 0
   Xbox360::VR::enable: 0
@@ -483,6 +510,9 @@ PlayerSettings:
   - Purchasing_ServiceEnabled::Purchasing_ServiceEnabled
   - UNet_ServiceEnabled::UNet_ServiceEnabled
   - Unity_Ads_ServiceEnabled::Unity_Ads_ServiceEnabled
+  - WebGL::emscriptenArgs
+  - WebGL::template
+  - additionalIl2CppArgs::additionalIl2CppArgs
   Analytics_ServiceEnabled::Analytics_ServiceEnabled: False
   Build_ServiceEnabled::Build_ServiceEnabled: False
   Collab_ServiceEnabled::Collab_ServiceEnabled: False
@@ -492,6 +522,9 @@ PlayerSettings:
   Purchasing_ServiceEnabled::Purchasing_ServiceEnabled: False
   UNet_ServiceEnabled::UNet_ServiceEnabled: False
   Unity_Ads_ServiceEnabled::Unity_Ads_ServiceEnabled: False
+  WebGL::emscriptenArgs: 
+  WebGL::template: APPLICATION:Default
+  additionalIl2CppArgs::additionalIl2CppArgs: 
   vectorPropertyNames:
   - Android::VR::enabledDevices
   - Metro::VR::enabledDevices

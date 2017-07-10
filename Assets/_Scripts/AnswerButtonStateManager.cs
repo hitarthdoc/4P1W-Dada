@@ -69,12 +69,16 @@ namespace States.Answers
 		{
 			letter = newLetter;
 			currentButtonState = AnswerButtonStates.Lettered;
+			if ( textComponent == null )
+			{
+				textComponent = GetComponentInChildren <Text> ();
+			}
 			textComponent.text = letter.ToString ();
 		}
 
 		public void AssignReferences ( InputManager newIPManRef, AnswerTextManager newATManRef, AudioManager audioManRef )
 		{
-			Profiler.BeginSample ( "AssignReferences Load" );
+			Profiler.BeginSample ( "Assign References Load" );
 			{
 				IPManReference = newIPManRef;
 				ATManReference = newATManRef;
@@ -91,6 +95,33 @@ namespace States.Answers
 				ATManReference = newATManRef;
 			}
 			Profiler.EndSample ();
+		}
+
+		public void SetStateAnswered ( char newLetter )
+		{
+			letter = newLetter;
+			currentButtonState = AnswerButtonStates.Answered;
+			if ( textComponent == null )
+			{
+				textComponent = GetComponentInChildren <Text> ();
+			}
+			textComponent.text = "<color=#00ff40ff>" + letter.ToString () + "</color>";
+		}
+
+		public void AddingToCompletePanel ()
+		{
+			currentButtonState = AnswerButtonStates.Answered;
+			if ( textComponent == null )
+			{
+				textComponent = GetComponentInChildren <Text> ();
+			}
+			textComponent.text = letter.ToString ();
+		}
+
+		public void ResetAnswerState ()
+		{
+			currentButtonState = AnswerButtonStates.NotLettered;
+			textComponent.text = "";
 		}
 
 		void OnClick ()

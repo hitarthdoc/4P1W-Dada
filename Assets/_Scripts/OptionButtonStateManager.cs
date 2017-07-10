@@ -20,23 +20,33 @@ namespace States.Options
 	{
 
 		[SerializeField]
-		InputManager IPManReference;
+		private InputManager IPManReference;
 
 		[SerializeField]
-		AnswerTextManager ATManReference;
+		private AnswerTextManager ATManReference;
 
 		[SerializeField]
-		OptionButtonStates currentButtonState = OptionButtonStates.Default;
+		private OptionButtonStates currentButtonState = OptionButtonStates.Default;
 
 		//The letter it will be holding.
 		[SerializeField]
-		char letter;
+		private char letter;
+
+		public char Letter {
+			get
+			{
+				return letter;
+			}
+		}
 
 		[SerializeField]
-		Button buttonComponent;
+		private Button buttonComponent;
 
 		[SerializeField]
-		Text textComponent;
+		private Text textComponent;
+
+		[SerializeField]
+		private GameObject childButton;
 
 		public delegate void OnClickedDelegate ();
 
@@ -67,20 +77,40 @@ namespace States.Options
 			currentButtonState = OptionButtonStates.NotClicked;
 
 			letter = newLetter;
-			textComponent.text = letter.ToString ();
+			if ( textComponent == null )
+			{
+				textComponent = GetComponentInChildren <Text> ();
+			}
+			textComponent.text = newLetter.ToString ();
 		}
 
 		public void AssignReferences ( InputManager newIPManRef, AnswerTextManager newATManRef )
 		{
 			IPManReference = newIPManRef;
 			ATManReference = newATManRef;
+		
+//			textComponent = GetComponentInChildren <Text> ();
+			childButton = transform.GetChild ( 0 ).gameObject;
 		}
 
 		public void ResetClickedStatus ()
 		{
-			currentButtonState = OptionButtonStates.NotClicked;
-			
-			textComponent.text = letter.ToString ();
+			if ( currentButtonState == OptionButtonStates.Clicked )
+			{
+				currentButtonState = OptionButtonStates.NotClicked;
+
+				childButton.SetActive ( true );
+//				textComponent.text = letter.ToString ();
+			}
+		}
+
+		public void SetStateDisabled ()
+		{
+			childButton.SetActive ( false );
+//			letter = '\0';
+			currentButtonState = OptionButtonStates.Disabled;
+
+//			textComponent.text = letter.ToString ();
 		}
 
 		void OnClick ()
@@ -101,7 +131,8 @@ namespace States.Options
 					{
 //					IPManReference.AcceptOption ( letter );
 						currentButtonState = OptionButtonStates.Clicked;
-						textComponent.text = "";
+//						textComponent.text = "";
+						childButton.SetActive ( false );
 					}
 					break;
 

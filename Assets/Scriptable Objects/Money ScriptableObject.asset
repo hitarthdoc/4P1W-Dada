@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e7e737e30ffa894c847d4373cc49509, type: 3}
   m_Name: Money ScriptableObject
   m_EditorClassIdentifier: 
-  moneyEarned: 100
+  moneyEarned: 200
   moneyEarnedPerLevel: 4
-  moneySpentOnPowerUp_1: 2
-  moneySpentOnPowerUp_2: 4
+  moneySpentOnPowerUp_1: 10
+  moneySpentOnPowerUp_2: 20

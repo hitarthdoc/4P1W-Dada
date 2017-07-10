@@ -50,6 +50,11 @@ namespace Managers
 			AnswerTextManager.OnOptionButtonPress += PlayOptionUIButtonSound;
 
 			AnswerTextManager.OnAnswerButtonPress += PlayAnswerUIButtonSound;
+
+			UIAudioSource.clip = GameLoop;
+			UIAudioSource.loop = true;
+			UIAudioSource.Play ();
+
 		}
 
 		void OnDisable ()
@@ -57,6 +62,7 @@ namespace Managers
 			AnswerTextManager.OnOptionButtonPress -= PlayOptionUIButtonSound;
 
 			AnswerTextManager.OnAnswerButtonPress -= PlayAnswerUIButtonSound;
+
 		}
 
 		public void PlayCommonUIButtonSound ()
@@ -85,6 +91,32 @@ namespace Managers
 
 		}
 
+		public void PlayPowerUpClip_1 ()
+		{
+			#if TESTING
+			Debug.Log ( "Playing CorrectAnswer" );
+			#endif
+
+			if ( PowerUp_1 != null )
+			{
+				UIAudioSource.PlayOneShot ( PowerUp_1 );
+			}
+
+		}
+
+		public void PlayPowerUpClip_2 ()
+		{
+			#if TESTING
+			Debug.Log ( "Playing CorrectAnswer" );
+			#endif
+
+			if ( PowerUp_2 != null )
+			{
+				UIAudioSource.PlayOneShot ( PowerUp_2 );
+			}
+
+		}
+
 		public void PlayIncorrectAnswerSound ()
 		{
 			#if TESTING
@@ -103,9 +135,9 @@ namespace Managers
 
 			if ( NextQuestion != null )
 			{
-			#if TESTING
+				#if TESTING
 				Debug.Log ( "Playing NextQuestion" );
-			#endif
+				#endif
 				UIAudioSource.PlayOneShot ( NextQuestion );
 			}
 

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿#define TESTING
+
+using UnityEngine;
 using System.Collections;
 
 using System.Collections.Generic;
@@ -7,6 +9,7 @@ using States.Options;
 using States.Answers;
 
 using SO.Money;
+using SO.Levels;
 
 namespace Managers
 {
@@ -29,6 +32,9 @@ namespace Managers
 				typedLetters = new List<char> ( answerWord.Length );
 			}
 		}
+
+		[SerializeField]
+		private Spawner SpawnerRef;
 
 		[SerializeField]
 		List <char> typedLetters = new List<char> ( 0 );
@@ -135,17 +141,21 @@ namespace Managers
 		public void CheckTypedLetters ()
 		{
 			bool correctAnswer = true;
-			for ( int letterIndex = 0; letterIndex < answerWord.Length; letterIndex++ )
+			int letterIndex = 0;
+			for ( ; letterIndex < answerWord.Length; letterIndex++ )
 			{
 				correctAnswer = !answerWord [ letterIndex ].Equals ( '\0' ) & answerWord [ letterIndex ].Equals ( typedLetters [ letterIndex ] );
 				if ( !correctAnswer )
 				{
+					#if UNITY_EDITOR && TESTING && false
 					Debug.Log ( string.Format ( "Letter Mismatch at\t{0}\tLetters are\t{1} and {2}.", letterIndex, answerWord [ letterIndex ], typedLetters [ letterIndex ] )
-								/* was the following. Used Format instead
-								"Letter Mismatch at\t" + letterIndex.ToString () + "\tLetters are\t\t" + 
-								answerWord [ letterIndex ].ToString () + "\t" + typedLetters [ letterIndex ]
-								*/
+					/* 
+					was the following. Used Format instead
+					"Letter Mismatch at\t" + letterIndex.ToString () + "\tLetters are\t\t" + 
+					answerWord [ letterIndex ].ToString () + "\t" + typedLetters [ letterIndex ]
+					*/
 					);
+					#endif
 					break;
 				}
 			}
@@ -163,11 +173,58 @@ namespace Managers
 				}
 			}
 
-			if ( !correctAnswer )
+			if ( !correctAnswer && answerWord [ letterIndex ].Equals ( '\0' ) )
 			{
+				#if UNITY_EDITOR && TESTING
 				//Next Level;
 				Debug.Log ( "Sorry Man you are at a LOSS." );
+				#endif
+				AudioManRef.PlayIncorrectAnswerSound ();
 			}
+		}
+
+		public void UpdateAnsweredLetters ( Level currentLevel )
+		{
+
+			for ( int index = 0; index < currentLevel.RemovedLetters.Count; index++ )
+			{
+				if ( currentLevel.RemovedLetters [ index ] )
+				{
+					for ( int optionIndex = 0; optionIndex < optionButtonReferences.Count; optionIndex++ )
+					{
+//						optionButtonReferences [ optionIndex ];
+						if ( optionButtonReferences [ optionIndex ] != null && optionButtonReferences [ optionIndex ].Equals ( SpawnerRef.OptionButtonsHolderAtIndex ( index ) ) )
+						{
+							#if UNITY_EDITOR && TESTING && true
+							Debug.Log ( string.Format ( "Here.\tAnswerIndex:\t{0},\tOptionIndex:\t{2},\tLetter:\t{1}", optionIndex, optionButtonReferences [ optionIndex ].Letter, index ) );
+							#endif
+							answerButtonReferences [ optionIndex ].ResetAnswerState ();
+							RemoveLetterFromTypedWord ( optionButtonReferences [ optionIndex ].Letter, optionIndex );
+						}
+					}
+				}
+			}
+
+			for ( int index = 0; index < currentLevel.AnsweredLetters.Count; index++ )
+			{
+				if ( currentLevel.AnsweredLetters [ index ] )
+				{
+					typedLetters [ index ] = currentLevel.Word [ index ];
+					answerButtonReferences [ index ].SetStateAnswered ( typedLetters [ index ] );
+
+					if ( optionButtonReferences [ index ] != null )
+					{
+						optionButtonReferences [ index ].ResetClickedStatus ();
+						optionButtonReferences [ index ] = default (OptionButtonStateManager);
+					}
+				}
+			}
+
+			if ( !typedLetters.Contains ( '\0' ) )
+			{
+				CheckTypedLetters ();
+			}
+
 		}
 
 		public void AddNewAnswerButtonsReference ( Transform answerButtonParent )
@@ -188,7 +245,6 @@ namespace Managers
 
 			}
 
-			
 //			Debug.Log ( answerButtonParent.childCount );
 		}
 
