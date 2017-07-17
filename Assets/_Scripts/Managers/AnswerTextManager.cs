@@ -173,7 +173,7 @@ namespace Managers
 				}
 			}
 
-			if ( !correctAnswer && answerWord [ letterIndex ].Equals ( '\0' ) )
+			if ( !correctAnswer && !answerWord [ letterIndex ].Equals ( typedLetters [ letterIndex ] ) )
 			{
 				#if UNITY_EDITOR && TESTING
 				//Next Level;
