@@ -128,8 +128,8 @@ namespace Managers
 			}
 			PlayerPrefs.Save ();
 			NoMenus ();
-			ToMainMenu ();
 			current = previous = UIStates.MainMenu;
+			ToMainMenu ();
 		}
 
 		void OnEnable ()
