@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Levels in Batches
   m_EditorClassIdentifier: 
   LevelBatches:
-  - show: 1
+  - show: 0
     locked: 1
     Levels:
     - show: 0
@@ -132,7 +132,7 @@ MonoBehaviour:
       AnsweredLetters: 0000000000
       RemovedLetters: 000000000000000000000000
       OtherChars: 6100700074006900630061006e006a006900720063007300
-    - show: 1
+    - show: 0
       locked: 1
       completionStatus: 0
       Pics:
@@ -145,7 +145,7 @@ MonoBehaviour:
       AnsweredLetters: 00000000000000000000
       RemovedLetters: 000000000000000000000000
       OtherChars: 650068006e00690079007300690066006c00700072006400
-  - show: 0
+  - show: 1
     locked: 1
     Levels:
     - show: 0
@@ -222,9 +222,22 @@ MonoBehaviour:
       - {fileID: 21300002, guid: 427adb78da7b6994cba1de3ff59227ba, type: 3}
       - {fileID: 21300000, guid: 427adb78da7b6994cba1de3ff59227ba, type: 3}
       Word: tri
-      Word2: mandiWr
+      Word2: mandir
       AnsweredLetters: 000000
       RemovedLetters: 000000000000000000000000
       OtherChars: 7400680072006500650068006e0074007a006a0069007200
+    - show: 0
+      locked: 1
+      completionStatus: 0
+      Pics:
+      - {fileID: 21300000, guid: 7b3f74120fa807049ac64eb0ecd5401b, type: 3}
+      - {fileID: 21300004, guid: 7b3f74120fa807049ac64eb0ecd5401b, type: 3}
+      - {fileID: 21300002, guid: 7b3f74120fa807049ac64eb0ecd5401b, type: 3}
+      - {fileID: 21300006, guid: 7b3f74120fa807049ac64eb0ecd5401b, type: 3}
+      Word: greed
+      Word2: 
+      AnsweredLetters: 0000000000
+      RemovedLetters: 000000000000000000000000
+      OtherChars: 6c006f0064006900720062006500670068006f0079006500
   MaxBatches: 10
   MaxLevelsInBatches: 10
