@@ -6,6 +6,8 @@ using System.Collections;
 
 using UnityEngine.UI;
 
+using UnityEngine.Profiling;
+
 using System;
 
 using System.IO;
