@@ -8,147 +8,148 @@ using Managers;
 namespace States.Options
 {
 
-	public enum OptionButtonStates
-	{
-		Clicked,
-		NotClicked,
-		Disabled,
-		Default,
-	}
+    public enum OptionButtonStates
+    {
+        Clicked,
+        NotClicked,
+        Disabled,
+        Default,
+    }
 
-	public class OptionButtonStateManager : MonoBehaviour
-	{
+    public class OptionButtonStateManager : MonoBehaviour
+    {
 
-		[SerializeField]
-		private InputManager IPManReference;
+        [SerializeField]
+        private InputManager IPManReference;
 
-		[SerializeField]
-		private AnswerTextManager ATManReference;
+        [SerializeField]
+        private AnswerTextManager ATManReference;
 
-		[SerializeField]
-		private OptionButtonStates currentButtonState = OptionButtonStates.Default;
+        [SerializeField]
+        private OptionButtonStates currentButtonState = OptionButtonStates.Default;
 
-		//The letter it will be holding.
-		[SerializeField]
-		private char letter;
+        //The letter it will be holding.
+        [SerializeField]
+        private char letter;
 
-		public char Letter {
-			get
-			{
-				return letter;
-			}
-		}
+        public char Letter
+        {
+            get
+            {
+                return letter;
+            }
+        }
 
-		[SerializeField]
-		private Button buttonComponent;
+        [SerializeField]
+        private Button buttonComponent;
 
-		[SerializeField]
-		private Text textComponent;
+        [SerializeField]
+        private Text textComponent;
 
-		[SerializeField]
-		private GameObject childButton;
+        [SerializeField]
+        private GameObject childButton;
 
-		public delegate void OnClickedDelegate ();
+        public delegate void OnClickedDelegate();
 
-		public OnClickedDelegate OnClickEvent;
+        public OnClickedDelegate OnClickEvent;
 
-		// Use this for initialization before Start
-		void Awake ()
-		{
-			buttonComponent = GetComponent <Button> ();
-			textComponent = GetComponentInChildren <Text> ();
+        // Use this for initialization before Start
+        void Awake()
+        {
+            buttonComponent = GetComponent<Button>();
+            textComponent = GetComponentInChildren<Text>();
 
-			buttonComponent.onClick.AddListener 
-			( 
-				delegate
-				{
-					this.OnClick ();
-				} 
-			);
-		}
+            buttonComponent.onClick.AddListener
+            (
+                delegate
+                {
+                    this.OnClick();
+                }
+            );
+        }
 
-		// Use this for initialization
-		void Start ()
-		{
-		}
+        // Use this for initialization
+        void Start()
+        {
+        }
 
-		public void AssignLetter ( char newLetter )
-		{
-			currentButtonState = OptionButtonStates.NotClicked;
+        public void AssignLetter(char newLetter)
+        {
+            currentButtonState = OptionButtonStates.NotClicked;
 
-			letter = newLetter;
-			if ( textComponent == null )
-			{
-				textComponent = GetComponentInChildren <Text> ();
-			}
-			textComponent.text = newLetter.ToString ();
-		}
+            letter = newLetter;
+            if (textComponent == null)
+            {
+                textComponent = GetComponentInChildren<Text>();
+            }
+            textComponent.text = newLetter.ToString();
+        }
 
-		public void AssignReferences ( InputManager newIPManRef, AnswerTextManager newATManRef )
-		{
-			IPManReference = newIPManRef;
-			ATManReference = newATManRef;
-		
-//			textComponent = GetComponentInChildren <Text> ();
-			childButton = transform.GetChild ( 0 ).gameObject;
-		}
+        public void AssignReferences(InputManager newIPManRef, AnswerTextManager newATManRef)
+        {
+            IPManReference = newIPManRef;
+            ATManReference = newATManRef;
 
-		public void ResetClickedStatus ()
-		{
-			if ( currentButtonState == OptionButtonStates.Clicked )
-			{
-				currentButtonState = OptionButtonStates.NotClicked;
+            //textComponent = GetComponentInChildren <Text> ();
+            childButton = transform.GetChild(0).gameObject;
+        }
 
-				childButton.SetActive ( true );
-//				textComponent.text = letter.ToString ();
-			}
-		}
+        public void ResetClickedStatus()
+        {
+            if (currentButtonState == OptionButtonStates.Clicked)
+            {
+                currentButtonState = OptionButtonStates.NotClicked;
 
-		public void SetStateDisabled ()
-		{
-			childButton.SetActive ( false );
-//			letter = '\0';
-			currentButtonState = OptionButtonStates.Disabled;
+                childButton.SetActive(true);
+                //textComponent.text = letter.ToString ();
+            }
+        }
 
-//			textComponent.text = letter.ToString ();
-		}
+        public void SetStateDisabled()
+        {
+            childButton.SetActive(false);
+            //letter = '\0';
+            currentButtonState = OptionButtonStates.Disabled;
 
-		void OnClick ()
-		{
-			if ( OnClickEvent != null )
-			{
-				OnClickEvent ();
-			}
+            //textComponent.text = letter.ToString ();
+        }
 
-			switch ( currentButtonState )
-			{
-				
-				case OptionButtonStates.Clicked:
-					break;
+        void OnClick()
+        {
+            if (OnClickEvent != null)
+            {
+                OnClickEvent();
+            }
 
-				case OptionButtonStates.NotClicked:
-					if ( ATManReference.AddLetterToTypedWord ( letter, this ) )
-					{
-//					IPManReference.AcceptOption ( letter );
-						currentButtonState = OptionButtonStates.Clicked;
-//						textComponent.text = "";
-						childButton.SetActive ( false );
-					}
-					break;
+            switch (currentButtonState)
+            {
 
-//					Used for Possible Power-Ups
-				case OptionButtonStates.Disabled:
-					break;
+                case OptionButtonStates.Clicked:
+                    break;
 
-				case OptionButtonStates.Default:
-					break;
+                case OptionButtonStates.NotClicked:
+                    if (ATManReference.AddLetterToTypedWord(letter, this))
+                    {
+                        //IPManReference.AcceptOption ( letter );
+                        currentButtonState = OptionButtonStates.Clicked;
+                        //textComponent.text = "";
+                        childButton.SetActive(false);
+                    }
+                    break;
 
-				default:
-					Debug.Log ( "We Have a Problem" );
-					break;
-			}
-		}
+                //Used for Possible Power-Ups
+                case OptionButtonStates.Disabled:
+                    break;
 
-	}
+                case OptionButtonStates.Default:
+                    break;
+
+                default:
+                    Debug.Log("We Have a Problem");
+                    break;
+            }
+        }
+
+    }
 
 }

@@ -4,19 +4,19 @@ using System.Collections;
 namespace SO
 {
 
-	public class DemoForEditor : MonoBehaviour
-	{
+    public class DemoForEditor : MonoBehaviour
+    {
 
-		// Use this for initialization
-		void Start ()
-		{
-	
-		}
-	
-		// Update is called once per frame
-		void Update ()
-		{
-	
-		}
-	}
+        // Use this for initialization
+        void Start()
+        {
+
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+    }
 }

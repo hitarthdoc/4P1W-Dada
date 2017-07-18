@@ -9,213 +9,213 @@ using States.Options;
 namespace Managers
 {
 
-	public class AudioManager : MonoBehaviour
-	{
+    public class AudioManager : MonoBehaviour
+    {
 
-		[SerializeField]
-		private UIManager UIManRef;
+        [SerializeField]
+        private UIManager UIManRef;
 
-		public static AudioClip UIButtonPress;
+        public static AudioClip UIButtonPress;
 
-		public AudioClip OptionButtonPress;
+        public AudioClip OptionButtonPress;
 
-		public AudioClip AnswerButtonPress;
+        public AudioClip AnswerButtonPress;
 
-		public AudioClip ImageOutButtonPress;
+        public AudioClip ImageOutButtonPress;
 
-		public AudioClip ImageInButtonPress;
+        public AudioClip ImageInButtonPress;
 
-		public AudioClip CorrectAnswer;
+        public AudioClip CorrectAnswer;
 
-		public AudioClip IncorrectAnswer;
+        public AudioClip IncorrectAnswer;
 
-		public AudioClip NextQuestion;
+        public AudioClip NextQuestion;
 
-		public AudioClip PowerUp_1;
+        public AudioClip PowerUp_1;
 
-		public AudioClip PowerUp_2;
+        public AudioClip PowerUp_2;
 
-		public AudioClip GameLoop;
+        public AudioClip GameLoop;
 
-		public AudioSource UIAudioSource;
+        public AudioSource UIAudioSource;
 
-		// Use this for initialization
-		void Start ()
-		{
+        // Use this for initialization
+        void Start ()
+        {
 
-		}
+        }
 
-		void OnEnable ()
-		{
-			AnswerTextManager.OnOptionButtonPress += PlayOptionUIButtonSound;
+        void OnEnable ()
+        {
+            AnswerTextManager.OnOptionButtonPress += PlayOptionUIButtonSound;
 
-			AnswerTextManager.OnAnswerButtonPress += PlayAnswerUIButtonSound;
+            AnswerTextManager.OnAnswerButtonPress += PlayAnswerUIButtonSound;
 
-			UIAudioSource.clip = GameLoop;
-			UIAudioSource.loop = true;
-			UIAudioSource.Play ();
+            UIAudioSource.clip = GameLoop;
+            UIAudioSource.loop = true;
+            UIAudioSource.Play ();
 
-		}
+        }
 
-		void OnDisable ()
-		{
-			AnswerTextManager.OnOptionButtonPress -= PlayOptionUIButtonSound;
+        void OnDisable ()
+        {
+            AnswerTextManager.OnOptionButtonPress -= PlayOptionUIButtonSound;
 
-			AnswerTextManager.OnAnswerButtonPress -= PlayAnswerUIButtonSound;
+            AnswerTextManager.OnAnswerButtonPress -= PlayAnswerUIButtonSound;
 
-		}
+        }
 
-		public void PlayCommonUIButtonSound ()
-		{
-			#if TESTING
-			Debug.Log ( "Playing UIButtonPress" );
-			#endif
+        public void PlayCommonUIButtonSound ()
+        {
+            #if TESTING
+            Debug.Log ( "Playing UIButtonPress" );
+            #endif
 
-			if ( UIButtonPress != null )
-			{
-				UIAudioSource.PlayOneShot ( UIButtonPress );
-			}
+            if ( UIButtonPress != null )
+            {
+                UIAudioSource.PlayOneShot ( UIButtonPress );
+            }
 
-		}
+        }
 
-		public void PlayCorrectAnswerSound ()
-		{
-			#if TESTING
-			Debug.Log ( "Playing CorrectAnswer" );
-			#endif
+        public void PlayCorrectAnswerSound ()
+        {
+            #if TESTING
+            Debug.Log ( "Playing CorrectAnswer" );
+            #endif
 
-			if ( CorrectAnswer != null )
-			{
-				UIAudioSource.PlayOneShot ( CorrectAnswer );
-			}
+            if ( CorrectAnswer != null )
+            {
+                UIAudioSource.PlayOneShot ( CorrectAnswer );
+            }
 
-		}
+        }
 
-		public void PlayPowerUpClip_1 ()
-		{
-			#if TESTING
-			Debug.Log ( "Playing CorrectAnswer" );
-			#endif
+        public void PlayPowerUpClip_1 ()
+        {
+            #if TESTING
+            Debug.Log ( "Playing CorrectAnswer" );
+            #endif
 
-			if ( PowerUp_1 != null )
-			{
-				UIAudioSource.PlayOneShot ( PowerUp_1 );
-			}
+            if ( PowerUp_1 != null )
+            {
+                UIAudioSource.PlayOneShot ( PowerUp_1 );
+            }
 
-		}
+        }
 
-		public void PlayPowerUpClip_2 ()
-		{
-			#if TESTING
-			Debug.Log ( "Playing CorrectAnswer" );
-			#endif
+        public void PlayPowerUpClip_2 ()
+        {
+            #if TESTING
+            Debug.Log ( "Playing CorrectAnswer" );
+            #endif
 
-			if ( PowerUp_2 != null )
-			{
-				UIAudioSource.PlayOneShot ( PowerUp_2 );
-			}
+            if ( PowerUp_2 != null )
+            {
+                UIAudioSource.PlayOneShot ( PowerUp_2 );
+            }
 
-		}
+        }
 
-		public void PlayIncorrectAnswerSound ()
-		{
-			#if TESTING
-			Debug.Log ( "Playing IncorrectAnswer" );
-			#endif
+        public void PlayIncorrectAnswerSound ()
+        {
+            #if TESTING
+            Debug.Log ( "Playing IncorrectAnswer" );
+            #endif
 
-			if ( IncorrectAnswer != null )
-			{
-				UIAudioSource.PlayOneShot ( IncorrectAnswer );
-			}
+            if ( IncorrectAnswer != null )
+            {
+                UIAudioSource.PlayOneShot ( IncorrectAnswer );
+            }
 
-		}
+        }
 
-		public void PlayNextQuestionSound ()
-		{
+        public void PlayNextQuestionSound ()
+        {
 
-			if ( NextQuestion != null )
-			{
-				#if TESTING
-				Debug.Log ( "Playing NextQuestion" );
-				#endif
-				UIAudioSource.PlayOneShot ( NextQuestion );
-			}
+            if ( NextQuestion != null )
+            {
+                #if TESTING
+                Debug.Log ( "Playing NextQuestion" );
+                #endif
+                UIAudioSource.PlayOneShot ( NextQuestion );
+            }
 
-		}
+        }
 
-		// Use this for initialization of Ans button Delegate
-		public void RegisterAnswerButton ( AnswerButtonStateManager ansButtonRef )
-		{
-			ansButtonRef.OnClickEvent = this.PlayAnswerUIButtonSound;
-		}
-
-
-		void PlayAnswerUIButtonSound ()
-		{
-			#if TESTING
-			Debug.Log ( "Answer Delegate working" );
-			#endif
-
-			if ( AnswerButtonPress != null )
-			{
-				UIAudioSource.PlayOneShot ( AnswerButtonPress );
-			}
-
-		}
-
-		// Use this for initialization of Ansbutton Delegate
-		public void RegisterOptionButton ( OptionButtonStateManager OptButtonRef )
-		{
-			OptButtonRef.OnClickEvent = this.PlayAnswerUIButtonSound;
-		}
+        // Use this for initialization of Ans button Delegate
+        public void RegisterAnswerButton ( AnswerButtonStateManager ansButtonRef )
+        {
+            ansButtonRef.OnClickEvent = this.PlayAnswerUIButtonSound;
+        }
 
 
-		void PlayOptionUIButtonSound ()
-		{
-			#if TESTING
-			Debug.Log ( "Option Delegate working" );
-			#endif
+        void PlayAnswerUIButtonSound ()
+        {
+            #if TESTING
+            Debug.Log ( "Answer Delegate working" );
+            #endif
 
-			if ( OptionButtonPress != null )
-			{
-				UIAudioSource.PlayOneShot ( OptionButtonPress );
-			}
+            if ( AnswerButtonPress != null )
+            {
+                UIAudioSource.PlayOneShot ( AnswerButtonPress );
+            }
 
-		}
+        }
 
-		public void PlayHintImageOutUIButtonSound ()
-		{
-			#if TESTING
-			Debug.Log ( "ImageOut Delegate working" );
-			#endif
+        // Use this for initialization of Ansbutton Delegate
+        public void RegisterOptionButton ( OptionButtonStateManager OptButtonRef )
+        {
+            OptButtonRef.OnClickEvent = this.PlayAnswerUIButtonSound;
+        }
 
-			if ( ImageOutButtonPress != null )
-			{
-				UIAudioSource.PlayOneShot ( ImageOutButtonPress );
-			}
 
-		}
+        void PlayOptionUIButtonSound ()
+        {
+            #if TESTING
+            Debug.Log ( "Option Delegate working" );
+            #endif
 
-		public void PlayHintImageInUIButtonSound ()
-		{
-			#if TESTING
-			Debug.Log ( "ImageIn Delegate working" );
-			#endif
+            if ( OptionButtonPress != null )
+            {
+                UIAudioSource.PlayOneShot ( OptionButtonPress );
+            }
 
-			if ( ImageInButtonPress != null )
-			{
-				UIAudioSource.PlayOneShot ( ImageInButtonPress );
-			}
+        }
 
-		}
+        public void PlayHintImageOutUIButtonSound ()
+        {
+            #if TESTING
+            Debug.Log ( "ImageOut Delegate working" );
+            #endif
 
-		public void ChangeMuteState ( bool state )
-		{
-			#if TESTING
-			Debug.Log (string.Format ("Mute State:\t{0}", UIAudioSource.mute));
-			#endif
-			UIAudioSource.mute = state;
-		}
-	}
+            if ( ImageOutButtonPress != null )
+            {
+                UIAudioSource.PlayOneShot ( ImageOutButtonPress );
+            }
+
+        }
+
+        public void PlayHintImageInUIButtonSound ()
+        {
+            #if TESTING
+            Debug.Log ( "ImageIn Delegate working" );
+            #endif
+
+            if ( ImageInButtonPress != null )
+            {
+                UIAudioSource.PlayOneShot ( ImageInButtonPress );
+            }
+
+        }
+
+        public void ChangeMuteState ( bool state )
+        {
+            #if TESTING
+            Debug.Log (string.Format ("Mute State:\t{0}", UIAudioSource.mute));
+            #endif
+            UIAudioSource.mute = state;
+        }
+    }
 
 }

@@ -4,10 +4,8 @@ using System.Collections;
 namespace Managers
 {
 
-	public class GameManager
-	{
+    public class GameManager
+    {
 
-
-
-	}
+    }
 }

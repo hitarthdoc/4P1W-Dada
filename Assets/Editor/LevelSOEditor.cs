@@ -8,380 +8,380 @@ using SO.Levels;
 
 using Special.Saver;
 
-[CustomEditor ( typeof ( LevelScriptableObject ) )]
+[CustomEditor(typeof(LevelScriptableObject))]
 public class LevelScriptEditor : Editor
 {
-	public override void OnInspectorGUI ()
-	{
+    public override void OnInspectorGUI()
+    {
 
-		LevelScriptableObject myTarget = ( LevelScriptableObject ) target;
+        LevelScriptableObject myTarget = (LevelScriptableObject)target;
 
-		Rect LSODetsAndMaxes = EditorGUILayout.BeginVertical ();
-		{
-			
-			EditorGUILayout.LabelField ( "Batch Count:\t", myTarget.LevelBatches.Capacity.ToString () );
-			EditorGUILayout.LabelField ( "Max Batches:\t", myTarget.MaxBatches.ToString () );
-			EditorGUILayout.LabelField ( "Max Levels in Batches:\t", myTarget.MaxLevelsInBatches.ToString () );
-			EditorGUILayout.LabelField ( "Max Levels Total:\t", ( myTarget.MaxLevelsInBatches * myTarget.MaxBatches ).ToString () );
-			EditorGUILayout.LabelField ( "Current Levels Total:\t", myTarget.CurrentLevelCount ().ToString () );
-//		EditorGUILayout.LabelField ( "Level", myTarget.LevelBatches.ToString () );
-		}
-		EditorGUILayout.EndVertical ();
+        Rect LSODetsAndMaxes = EditorGUILayout.BeginVertical();
+        {
 
-		Rect SpecialFunctions = EditorGUILayout.BeginHorizontal ();
-		{
-			if ( myTarget != null && false )
-			{
-				if ( GUILayout.Button ( "Save Level Object" ) )
-				{
-					MyXMLSerializer.Serialize <List <LevelBatch>> ( Application.persistentDataPath + "/Save.SAVE", myTarget.LevelBatches );
-					Debug.Log ( Application.persistentDataPath );
-				}
+            EditorGUILayout.LabelField("Batch Count:\t", myTarget.LevelBatches.Capacity.ToString());
+            EditorGUILayout.LabelField("Max Batches:\t", myTarget.MaxBatches.ToString());
+            EditorGUILayout.LabelField("Max Levels in Batches:\t", myTarget.MaxLevelsInBatches.ToString());
+            EditorGUILayout.LabelField("Max Levels Total:\t", (myTarget.MaxLevelsInBatches * myTarget.MaxBatches).ToString());
+            EditorGUILayout.LabelField("Current Levels Total:\t", myTarget.CurrentLevelCount().ToString());
+            //EditorGUILayout.LabelField ( "Level", myTarget.LevelBatches.ToString () );
+        }
+        EditorGUILayout.EndVertical();
 
-				if ( GUILayout.Button ( "Restore Level Object" ) )
-				{
-					myTarget.LevelBatches = MyXMLSerializer.Deserialize <List <LevelBatch>> ( Application.persistentDataPath + "/Save.SAVE" );
-					Debug.Log ( myTarget );
-				}
-			}
+        Rect SpecialFunctions = EditorGUILayout.BeginHorizontal();
+        {
+            if (myTarget != null && false)
+            {
+                if (GUILayout.Button("Save Level Object"))
+                {
+                    MyXMLSerializer.Serialize<List<LevelBatch>>(Application.persistentDataPath + "/Save.SAVE", myTarget.LevelBatches);
+                    Debug.Log(Application.persistentDataPath);
+                }
 
-			if ( GUILayout.Button ( "Delete Saved Game" ) && ( System.IO.File.Exists ( Application.persistentDataPath + Constant.Constants.LevelFileName ) ) )
-			{
-				System.IO.File.Delete ( Application.persistentDataPath + Constant.Constants.LevelFileName );
-			}
+                if (GUILayout.Button("Restore Level Object"))
+                {
+                    myTarget.LevelBatches = MyXMLSerializer.Deserialize<List<LevelBatch>>(Application.persistentDataPath + "/Save.SAVE");
+                    Debug.Log(myTarget);
+                }
+            }
 
-			if ( GUILayout.Button ( "Reset Answered and Removed Letters" ) )
-			{
-				foreach ( LevelBatch batchItem in myTarget.LevelBatches )
-				{
-					foreach ( Level levelItem in batchItem.Levels )
-					{
-						levelItem.ClearRemoved ();
-						levelItem.ClearAnswered ();
-					}
-				}
-			}
+            if (GUILayout.Button("Delete Saved Game") && (System.IO.File.Exists(Application.persistentDataPath + Constant.Constants.LevelFileName)))
+            {
+                System.IO.File.Delete(Application.persistentDataPath + Constant.Constants.LevelFileName);
+            }
 
-		}
-		EditorGUILayout.EndHorizontal ();
+            if (GUILayout.Button("Reset Answered and Removed Letters"))
+            {
+                foreach (LevelBatch batchItem in myTarget.LevelBatches)
+                {
+                    foreach (Level levelItem in batchItem.Levels)
+                    {
+                        levelItem.ClearRemoved();
+                        levelItem.ClearAnswered();
+                    }
+                }
+            }
 
-		if ( myTarget.LevelBatches.Count < myTarget.MaxBatches )
-		{
-			if ( GUILayout.Button ( "Add Batch" ) )
-			{
-				myTarget.AddBatch ();
-			}
-		}
+        }
+        EditorGUILayout.EndHorizontal();
 
-		Rect LSO = EditorGUILayout.BeginVertical ();
+        if (myTarget.LevelBatches.Count < myTarget.MaxBatches)
+        {
+            if (GUILayout.Button("Add Batch"))
+            {
+                myTarget.AddBatch();
+            }
+        }
 
-		int batchIndex = 0;
+        Rect LSO = EditorGUILayout.BeginVertical();
 
-		foreach ( LevelBatch batch in myTarget.LevelBatches )
-		{
-			
-			Rect batchAndItsOption = EditorGUILayout.BeginHorizontal ();
-			{
-				batch.show = EditorGUILayout.Foldout ( batch.show, "Batch:\t" + batchIndex.ToString () );
+        int batchIndex = 0;
 
-				if ( !batch.locked )
-				{
-					
-					if ( GUILayout.Button ( "Delete Batch" ) )
-					{
-						myTarget.DeleteBatch ( batchIndex );
-						//Debug.Log ( "Here" );
-					}
-					if ( GUILayout.Button ( "Reset Batch" ) )
-					{
-						myTarget.ResetBatch ( batchIndex );
-						//Debug.Log ( "Here" );
-					}
+        foreach (LevelBatch batch in myTarget.LevelBatches)
+        {
 
-					if ( batch.Levels.Count < myTarget.MaxLevelsInBatches )
-					{
-						if ( GUILayout.Button ( "Add Level" ) )
-						{
-							batch.AddLevel ();
-						}
-					}
-				}
-				batch.locked = EditorGUILayout.Toggle ( "Locked:", batch.locked );
-				batchIndex++;
-			}
-			EditorGUILayout.EndHorizontal ();
+            Rect batchAndItsOption = EditorGUILayout.BeginHorizontal();
+            {
+                batch.show = EditorGUILayout.Foldout(batch.show, "Batch:\t" + batchIndex.ToString());
 
-			if ( batch.show )
-			{
-				Rect batchRect = EditorGUILayout.BeginVertical ();
-				{
-//					EditorGUILayout.LabelField ( "Batch:\t" + batchIndex );
-				
-					int levelIndex = 0;
+                if (!batch.locked)
+                {
 
-					GUIStyle rightAlignment = new GUIStyle ();
-					rightAlignment.alignment = TextAnchor.MiddleRight;
-					rightAlignment.fixedWidth = -100.0f;
-					rightAlignment.fixedHeight = 20.0f;
-					rightAlignment.padding = new RectOffset ( 0, 0, 0, 0 );
-					rightAlignment.margin = new RectOffset ( 0, 0, 0, 0 );
-					rightAlignment.stretchWidth = false;
+                    if (GUILayout.Button("Delete Batch"))
+                    {
+                        myTarget.DeleteBatch(batchIndex);
+                        //Debug.Log ( "Here" );
+                    }
+                    if (GUILayout.Button("Reset Batch"))
+                    {
+                        myTarget.ResetBatch(batchIndex);
+                        //Debug.Log ( "Here" );
+                    }
 
-					GUIStyle centerAlignment = new GUIStyle ();
-					centerAlignment.alignment = TextAnchor.MiddleCenter;
-					centerAlignment.fixedWidth = 500.0f;
-					centerAlignment.padding = new RectOffset ( 0, 0, 0, 0 );
-					centerAlignment.margin = new RectOffset ( 0, 0, 0, 0 );
+                    if (batch.Levels.Count < myTarget.MaxLevelsInBatches)
+                    {
+                        if (GUILayout.Button("Add Level"))
+                        {
+                            batch.AddLevel();
+                        }
+                    }
+                }
+                batch.locked = EditorGUILayout.Toggle("Locked:", batch.locked);
+                batchIndex++;
+            }
+            EditorGUILayout.EndHorizontal();
 
-					GUIStyle leftAlignment = new GUIStyle ();
-					leftAlignment.alignment = TextAnchor.MiddleLeft;
-					leftAlignment.fixedWidth = 200.0f;
-					leftAlignment.fixedHeight = 20.0f;
-					leftAlignment.padding = new RectOffset ( 10, 10, 5, 10 );
-					leftAlignment.margin = new RectOffset ( 10, 10, 5, 10 );
+            if (batch.show)
+            {
+                Rect batchRect = EditorGUILayout.BeginVertical();
+                {
+                    //EditorGUILayout.LabelField ( "Batch:\t" + batchIndex );
 
-					foreach ( Level level in batch.Levels )
-					{
-						
-						Rect levelAndItsOption = EditorGUILayout.BeginHorizontal ( centerAlignment );
-						{
-							level.show = EditorGUILayout.Foldout ( level.show, "Level: " + levelIndex.ToString () );
+                    int levelIndex = 0;
 
-							if ( !level.locked )
-							{
-								Rect levelOptions = EditorGUILayout.BeginHorizontal ();
-								{
-									if ( GUILayout.Button ( "Delete Level" ) )
-									{
-										batch.DeleteLevel ( levelIndex );
-										//Debug.Log ( "Here" );
-									}
-									if ( GUILayout.Button ( "Reset Level" ) )
-									{
-										batch.ResetLevel ( levelIndex );
-										//Debug.Log ( "Here" );
-									}
-								}
-								EditorGUILayout.EndHorizontal ();
+                    GUIStyle rightAlignment = new GUIStyle();
+                    rightAlignment.alignment = TextAnchor.MiddleRight;
+                    rightAlignment.fixedWidth = -100.0f;
+                    rightAlignment.fixedHeight = 20.0f;
+                    rightAlignment.padding = new RectOffset(0, 0, 0, 0);
+                    rightAlignment.margin = new RectOffset(0, 0, 0, 0);
+                    rightAlignment.stretchWidth = false;
 
-							}
-//
-//							GUIStyle rightAlignment = new GUIStyle ();
-//							rightAlignment.alignment = TextAnchor.MiddleRight;
-//							rightAlignment.fixedWidth = 100.0f;
-//							rightAlignment.padding = new RectOffset ( 0, 0, 0, 0 );
-//							rightAlignment.margin = new RectOffset ( 0, 0, 0, 0 );
-//
-//							Rect levelLockOption = EditorGUILayout.BeginHorizontal ();
-//							{
-							level.locked = EditorGUILayout.Toggle ( "Locked:", level.locked );
-//							}
-//							EditorGUILayout.EndHorizontal ();
+                    GUIStyle centerAlignment = new GUIStyle();
+                    centerAlignment.alignment = TextAnchor.MiddleCenter;
+                    centerAlignment.fixedWidth = 500.0f;
+                    centerAlignment.padding = new RectOffset(0, 0, 0, 0);
+                    centerAlignment.margin = new RectOffset(0, 0, 0, 0);
 
-							levelIndex++;
-						}
-						EditorGUILayout.EndHorizontal ();
+                    GUIStyle leftAlignment = new GUIStyle();
+                    leftAlignment.alignment = TextAnchor.MiddleLeft;
+                    leftAlignment.fixedWidth = 200.0f;
+                    leftAlignment.fixedHeight = 20.0f;
+                    leftAlignment.padding = new RectOffset(10, 10, 5, 10);
+                    leftAlignment.margin = new RectOffset(10, 10, 5, 10);
 
-						if ( level.show )
-						{
-							string word	= level.Word;
-							//EditorGUILayout.LabelField ( "Level:\t" + levelIndex );
-							Rect levelRect = EditorGUILayout.BeginVertical ();
-							{
-								Rect answerRectHori = EditorGUILayout.BeginHorizontal ();
-								{
-									level.Word = EditorGUILayout.TextField ( "Answer:", level.Word );
+                    foreach (Level level in batch.Levels)
+                    {
 
-									if ( !level.Word.Equals ( word ) )
-									{
-										level.ClearAnswered ();
+                        Rect levelAndItsOption = EditorGUILayout.BeginHorizontal(centerAlignment);
+                        {
+                            level.show = EditorGUILayout.Foldout(level.show, "Level: " + levelIndex.ToString());
 
-									}
-									if ( !level.locked )
-									{
+                            if (!level.locked)
+                            {
+                                Rect levelOptions = EditorGUILayout.BeginHorizontal();
+                                {
+                                    if (GUILayout.Button("Delete Level"))
+                                    {
+                                        batch.DeleteLevel(levelIndex);
+                                        //Debug.Log ( "Here" );
+                                    }
+                                    if (GUILayout.Button("Reset Level"))
+                                    {
+                                        batch.ResetLevel(levelIndex);
+                                        //Debug.Log ( "Here" );
+                                    }
+                                }
+                                EditorGUILayout.EndHorizontal();
 
-										if ( GUILayout.Button ( "Clear Answer" ) )
-										{
-											level.ClearWord ();
-											//Debug.Log ( "Here" );
-										}
-									}
-								}
-								EditorGUILayout.EndHorizontal ();
+                            }
+                            //
+                            //GUIStyle rightAlignment = new GUIStyle ();
+                            //rightAlignment.alignment = TextAnchor.MiddleRight;
+                            //rightAlignment.fixedWidth = 100.0f;
+                            //rightAlignment.padding = new RectOffset ( 0, 0, 0, 0 );
+                            //rightAlignment.margin = new RectOffset ( 0, 0, 0, 0 );
+                            //
+                            //Rect levelLockOption = EditorGUILayout.BeginHorizontal ();
+                            //{
+                            level.locked = EditorGUILayout.Toggle("Locked:", level.locked);
+                            //}
+                            //EditorGUILayout.EndHorizontal ();
 
-								Rect suffixRectHori = EditorGUILayout.BeginHorizontal ();
-								{
-									level.Word2 = EditorGUILayout.TextField ( "Suffix:", level.Word2 );
+                            levelIndex++;
+                        }
+                        EditorGUILayout.EndHorizontal();
 
-									if ( !level.locked )
-									{
+                        if (level.show)
+                        {
+                            string word = level.Word;
+                            //EditorGUILayout.LabelField ( "Level:\t" + levelIndex );
+                            Rect levelRect = EditorGUILayout.BeginVertical();
+                            {
+                                Rect answerRectHori = EditorGUILayout.BeginHorizontal();
+                                {
+                                    level.Word = EditorGUILayout.TextField("Answer:", level.Word).ToLower();
 
-										if ( GUILayout.Button ( "Clear Suffix" ) )
-										{
-											level.ClearSuffix ();
-											//Debug.Log ( "Here" );
-										}
-									}
-								}
-								EditorGUILayout.EndHorizontal ();
+                                    if (!level.Word.Equals(word))
+                                    {
+                                        level.ClearAnswered();
 
-								EditorGUILayout.Space ();
+                                    }
+                                    if (!level.locked)
+                                    {
 
-								Rect optionsRectHori = EditorGUILayout.BeginHorizontal ();
-								{
-									EditorGUILayout.LabelField ( "Options:" );
+                                        if (GUILayout.Button("Clear Answer"))
+                                        {
+                                            level.ClearWord();
+                                            //Debug.Log ( "Here" );
+                                        }
+                                    }
+                                }
+                                EditorGUILayout.EndHorizontal();
 
-									Rect optionsRectVert = EditorGUILayout.BeginVertical ();
-									{
+                                Rect suffixRectHori = EditorGUILayout.BeginHorizontal();
+                                {
+                                    level.Word2 = EditorGUILayout.TextField("Suffix:", level.Word2).ToLower();
 
-										Rect optionsRowRect_1 = EditorGUILayout.BeginHorizontal ();
-										{
+                                    if (!level.locked)
+                                    {
 
-											for ( int i = 0; i < 6; i++ )
-											{
-												level.OtherChars [ i ] = EditorGUILayout.TextField ( level.OtherChars [ i ].ToString (), GUILayout.Width ( 20.0F ) ) [ 0 ];
-											}
-										}
-										EditorGUILayout.EndHorizontal ();
+                                        if (GUILayout.Button("Clear Suffix"))
+                                        {
+                                            level.ClearSuffix();
+                                            //Debug.Log ( "Here" );
+                                        }
+                                    }
+                                }
+                                EditorGUILayout.EndHorizontal();
 
-										Rect optionsRowRect_2 = EditorGUILayout.BeginHorizontal ();
-										{
-											for ( int i = 6; i < 12; i++ )
-											{
-												level.OtherChars [ i ] = EditorGUILayout.TextField ( level.OtherChars [ i ].ToString (), GUILayout.Width ( 20.0F ) ) [ 0 ];
-											}
-										}
-										EditorGUILayout.EndHorizontal ();
-									}
-									EditorGUILayout.EndVertical ();
-									if ( !level.locked )
-									{
-										
-										if ( GUILayout.Button ( "Clear Options" ) )
-										{
-											level.ClearOptions ();
-											//Debug.Log ( "Here" );
-										}
-									}
-								}
-								EditorGUILayout.EndHorizontal ();
+                                EditorGUILayout.Space();
 
-								EditorGUILayout.Space ();
+                                Rect optionsRectHori = EditorGUILayout.BeginHorizontal();
+                                {
+                                    EditorGUILayout.LabelField("Options:");
 
-								Rect picsRectHori = EditorGUILayout.BeginHorizontal ();
-								{
-									EditorGUILayout.LabelField ( "Selected Pictures:" );
+                                    Rect optionsRectVert = EditorGUILayout.BeginVertical();
+                                    {
 
-									Rect addedLettersRowRect_1 = EditorGUILayout.BeginHorizontal ();
-									{
-										for ( int i = 0; i < 4; i++ )
-										{
-											level.Pics [ i ] = EditorGUILayout.ObjectField ( level.Pics [ i ], typeof ( Sprite ), false ) as Sprite;
-										}
-									}
-									EditorGUILayout.EndHorizontal ();
-									if ( !level.locked )
-									{
-										
-										if ( GUILayout.Button ( "Clear Selected Pictures" ) )
-										{
-											level.ClearSelectedPictures ();
-											//										Debug.Log ( "Here" );
-										}
-									}
-								}
-								EditorGUILayout.EndHorizontal ();
+                                        Rect optionsRowRect_1 = EditorGUILayout.BeginHorizontal();
+                                        {
 
-								EditorGUILayout.Space ();
+                                            for (int i = 0; i < 6; i++)
+                                            {
+                                                level.OtherChars[i] = EditorGUILayout.TextField(level.OtherChars[i].ToString(), GUILayout.Width(20.0F))[0];
+                                            }
+                                        }
+                                        EditorGUILayout.EndHorizontal();
 
-								Rect removedLettersRectHori = EditorGUILayout.BeginHorizontal ();
-								{
-									EditorGUILayout.LabelField ( "Removed Letters:" );
+                                        Rect optionsRowRect_2 = EditorGUILayout.BeginHorizontal();
+                                        {
+                                            for (int i = 6; i < 12; i++)
+                                            {
+                                                level.OtherChars[i] = EditorGUILayout.TextField(level.OtherChars[i].ToString(), GUILayout.Width(20.0F))[0];
+                                            }
+                                        }
+                                        EditorGUILayout.EndHorizontal();
+                                    }
+                                    EditorGUILayout.EndVertical();
+                                    if (!level.locked)
+                                    {
 
-									Rect removedLettersRectVert = EditorGUILayout.BeginVertical ();
-									{
+                                        if (GUILayout.Button("Clear Options"))
+                                        {
+                                            level.ClearOptions();
+                                            //Debug.Log ( "Here" );
+                                        }
+                                    }
+                                }
+                                EditorGUILayout.EndHorizontal();
 
-										Rect removedLettersRowRect_1 = EditorGUILayout.BeginHorizontal ();
-										{
+                                EditorGUILayout.Space();
 
-											for ( int i = 0; i < 6; i++ )
-											{
-												level.RemovedLetters [ i ] = EditorGUILayout.Toggle ( level.RemovedLetters [ i ], GUILayout.Width ( 20.0F ) );
-											}
-										}
-										EditorGUILayout.EndHorizontal ();
+                                Rect picsRectHori = EditorGUILayout.BeginHorizontal();
+                                {
+                                    EditorGUILayout.LabelField("Selected Pictures:");
 
-										Rect removedLettersRowRect_2 = EditorGUILayout.BeginHorizontal ();
-										{
-											for ( int i = 6; i < 12; i++ )
-											{
-												level.RemovedLetters [ i ] = EditorGUILayout.Toggle ( level.RemovedLetters [ i ], GUILayout.Width ( 20.0F ) );
-											}
-										}
-										EditorGUILayout.EndHorizontal ();
-									}
-									EditorGUILayout.EndVertical ();
-									if ( !level.locked )
-									{
-										
-										if ( GUILayout.Button ( "Clear Removed" ) )
-										{
-											level.ClearRemoved ();
-//										Debug.Log ( "Here" );
-										}
-									}
-								}
-								EditorGUILayout.EndHorizontal ();
+                                    Rect addedLettersRowRect_1 = EditorGUILayout.BeginHorizontal();
+                                    {
+                                        for (int i = 0; i < 4; i++)
+                                        {
+                                            level.Pics[i] = EditorGUILayout.ObjectField(level.Pics[i], typeof(Sprite), false) as Sprite;
+                                        }
+                                    }
+                                    EditorGUILayout.EndHorizontal();
+                                    if (!level.locked)
+                                    {
 
-								EditorGUILayout.Space ();
+                                        if (GUILayout.Button("Clear Selected Pictures"))
+                                        {
+                                            level.ClearSelectedPictures();
+                                            //Debug.Log ( "Here" );
+                                        }
+                                    }
+                                }
+                                EditorGUILayout.EndHorizontal();
 
-								Rect addedLettersRectHori = EditorGUILayout.BeginHorizontal ();
-								{
-									EditorGUILayout.LabelField ( "Added Letters:" );
+                                EditorGUILayout.Space();
 
-									Rect addedLettersRectVert = EditorGUILayout.BeginVertical ();
-									{
+                                Rect removedLettersRectHori = EditorGUILayout.BeginHorizontal();
+                                {
+                                    EditorGUILayout.LabelField("Removed Letters:");
 
-										Rect addedLettersRowRect_1 = EditorGUILayout.BeginHorizontal ();
-										{
+                                    Rect removedLettersRectVert = EditorGUILayout.BeginVertical();
+                                    {
 
-											for ( int i = 0; i < level.AnsweredLetters.Count; i++ )
-											{
-												level.AnsweredLetters [ i ] = EditorGUILayout.Toggle ( level.AnsweredLetters [ i ], GUILayout.Width ( 20.0F ) );
-											}
-										}
-										EditorGUILayout.EndHorizontal ();
+                                        Rect removedLettersRowRect_1 = EditorGUILayout.BeginHorizontal();
+                                        {
 
-									}
-									EditorGUILayout.EndVertical ();
-									if ( !level.locked )
-									{
-										
-										if ( GUILayout.Button ( "Clear Answered" ) )
-										{
-											level.ClearAnswered ();
-											//										Debug.Log ( "Here" );
-										}
-									}
-								}
-								EditorGUILayout.EndHorizontal ();
+                                            for (int i = 0; i < 6; i++)
+                                            {
+                                                level.RemovedLetters[i] = EditorGUILayout.Toggle(level.RemovedLetters[i], GUILayout.Width(20.0F));
+                                            }
+                                        }
+                                        EditorGUILayout.EndHorizontal();
 
-								EditorGUILayout.Space ();
+                                        Rect removedLettersRowRect_2 = EditorGUILayout.BeginHorizontal();
+                                        {
+                                            for (int i = 6; i < 12; i++)
+                                            {
+                                                level.RemovedLetters[i] = EditorGUILayout.Toggle(level.RemovedLetters[i], GUILayout.Width(20.0F));
+                                            }
+                                        }
+                                        EditorGUILayout.EndHorizontal();
+                                    }
+                                    EditorGUILayout.EndVertical();
+                                    if (!level.locked)
+                                    {
 
-								EditorGUILayout.LabelField ( "", GUI.skin.horizontalSlider );
-							}
-							EditorGUILayout.EndVertical ();
-						}
-					}
+                                        if (GUILayout.Button("Clear Removed"))
+                                        {
+                                            level.ClearRemoved();
+                                            //Debug.Log ( "Here" );
+                                        }
+                                    }
+                                }
+                                EditorGUILayout.EndHorizontal();
 
-				}
-				EditorGUILayout.EndVertical ();
-			}
-//			EditorGUILayout.LabelField ( "", GUI.skin.horizontalSlider );
-		}
+                                EditorGUILayout.Space();
 
-		EditorGUILayout.EndVertical ();
+                                Rect addedLettersRectHori = EditorGUILayout.BeginHorizontal();
+                                {
+                                    EditorGUILayout.LabelField("Added Letters:");
 
-		EditorUtility.SetDirty ( myTarget );
-	}
+                                    Rect addedLettersRectVert = EditorGUILayout.BeginVertical();
+                                    {
+
+                                        Rect addedLettersRowRect_1 = EditorGUILayout.BeginHorizontal();
+                                        {
+
+                                            for (int i = 0; i < level.AnsweredLetters.Count; i++)
+                                            {
+                                                level.AnsweredLetters[i] = EditorGUILayout.Toggle(level.AnsweredLetters[i], GUILayout.Width(20.0F));
+                                            }
+                                        }
+                                        EditorGUILayout.EndHorizontal();
+
+                                    }
+                                    EditorGUILayout.EndVertical();
+                                    if (!level.locked)
+                                    {
+
+                                        if (GUILayout.Button("Clear Answered"))
+                                        {
+                                            level.ClearAnswered();
+                                            //Debug.Log ( "Here" );
+                                        }
+                                    }
+                                }
+                                EditorGUILayout.EndHorizontal();
+
+                                EditorGUILayout.Space();
+
+                                EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+                            }
+                            EditorGUILayout.EndVertical();
+                        }
+                    }
+
+                }
+                EditorGUILayout.EndVertical();
+            }
+            //EditorGUILayout.LabelField ( "", GUI.skin.horizontalSlider );
+        }
+
+        EditorGUILayout.EndVertical();
+
+        EditorUtility.SetDirty(myTarget);
+    }
 }
