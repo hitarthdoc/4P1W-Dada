@@ -236,19 +236,24 @@ public class LevelScriptEditor : Editor
 
                                         Rect optionsRowRect_1 = EditorGUILayout.BeginHorizontal();
                                         {
-
+                                            string temp;
                                             for (int i = 0; i < 6; i++)
                                             {
-                                                level.OtherChars[i] = EditorGUILayout.TextField(level.OtherChars[i].ToString(), GUILayout.Width(20.0F))[0];
+                                                temp = EditorGUILayout.TextField(level.OtherChars[i].ToString().ToLower(), GUILayout.Width(20.0F));
+
+                                                level.OtherChars[i] = (temp.Length > 0) ? temp[0] : default(char);
                                             }
                                         }
                                         EditorGUILayout.EndHorizontal();
 
                                         Rect optionsRowRect_2 = EditorGUILayout.BeginHorizontal();
                                         {
+                                            string temp;
                                             for (int i = 6; i < 12; i++)
                                             {
-                                                level.OtherChars[i] = EditorGUILayout.TextField(level.OtherChars[i].ToString(), GUILayout.Width(20.0F))[0];
+                                                temp = EditorGUILayout.TextField(level.OtherChars[i].ToString().ToLower(), GUILayout.Width(20.0F));
+
+                                                level.OtherChars[i] = (temp.Length > 0) ? temp[0] : default(char);
                                             }
                                         }
                                         EditorGUILayout.EndHorizontal();
