@@ -277,23 +277,43 @@ public class LevelScriptEditor : Editor
                                 {
                                     EditorGUILayout.LabelField("Selected Pictures:");
 
-                                    Rect addedLettersRowRect_1 = EditorGUILayout.BeginHorizontal();
-                                    {
-                                        for (int i = 0; i < 4; i++)
-                                        {
-                                            level.Pics[i] = EditorGUILayout.ObjectField(level.Pics[i], typeof(Sprite), false) as Sprite;
-                                        }
-                                    }
-                                    EditorGUILayout.EndHorizontal();
-                                    if (!level.locked)
+                                    Rect picsRectVert = EditorGUILayout.BeginVertical();
                                     {
 
-                                        if (GUILayout.Button("Clear Selected Pictures"))
+                                        Rect picsRowRect_1 = EditorGUILayout.BeginHorizontal();
                                         {
-                                            level.ClearSelectedPictures();
-                                            //Debug.Log ( "Here" );
+                                            for (int i = 0; i < 2; i++)
+                                            {
+                                                level.Pics[i] = EditorGUILayout.ObjectField(level.Pics[i], typeof(Sprite), false) as Sprite;
+                                            }
                                         }
+                                        EditorGUILayout.EndHorizontal();
+
+                                        Rect picsRowRect_2 = EditorGUILayout.BeginHorizontal();
+                                        {
+                                            for (int i = 2; i < 4; i++)
+                                            {
+                                                level.Pics[i] = EditorGUILayout.ObjectField(level.Pics[i], typeof(Sprite), false) as Sprite;
+                                            }
+                                        }
+                                        EditorGUILayout.EndHorizontal();
+
+                                        Rect picsOptionsRect = EditorGUILayout.BeginHorizontal();
+                                        {
+
+                                            if (!level.locked)
+                                            {
+
+                                                if (GUILayout.Button("Clear Selected Pictures"))
+                                                {
+                                                    level.ClearSelectedPictures();
+                                                    //Debug.Log ( "Here" );
+                                                }
+                                            }
+                                        }
+                                        EditorGUILayout.EndHorizontal();
                                     }
+                                    EditorGUILayout.EndVertical();
                                 }
                                 EditorGUILayout.EndHorizontal();
 
