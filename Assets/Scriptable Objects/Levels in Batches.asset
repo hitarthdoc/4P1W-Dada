@@ -239,5 +239,18 @@ MonoBehaviour:
       AnsweredLetters: 0000000000
       RemovedLetters: 000000000000000000000000
       OtherChars: 6c006f0064006900720062006500670068006f0079006500
+    - show: 1
+      locked: 1
+      completionStatus: 0
+      Pics:
+      - {fileID: 21300000, guid: 00d712e9d8a8a584d8e02a5052c794a7, type: 3}
+      - {fileID: 21300002, guid: 00d712e9d8a8a584d8e02a5052c794a7, type: 3}
+      - {fileID: 21300006, guid: 00d712e9d8a8a584d8e02a5052c794a7, type: 3}
+      - {fileID: 21300004, guid: 00d712e9d8a8a584d8e02a5052c794a7, type: 3}
+      Word: jealousy
+      Word2: 
+      AnsweredLetters: 0000000000000000
+      RemovedLetters: 000000000000000000000000
+      OtherChars: 73006a006e006c0076007500650079006f00640061006900
   MaxBatches: 10
   MaxLevelsInBatches: 10
